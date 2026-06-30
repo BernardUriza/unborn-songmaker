@@ -9,9 +9,10 @@ from scipy import signal
 
 from .drums import DRUM_VOICES
 from .sequencer import NoteEvent
+from .soundbank import SOUNDBANK
 from .synth import SR, VOICES, midi_to_freq
 
-ALL_VOICES = {**VOICES, **DRUM_VOICES}
+ALL_VOICES = {**VOICES, **DRUM_VOICES, **SOUNDBANK}
 DUCKABLE = {"bass", "subbass", "bell", "harmonic", "pad"}
 VOICE_GAIN = {
     "kick": 0.85, "subbass": 0.5, "bass": 0.7, "hat": 0.55, "hat_open": 0.45,
