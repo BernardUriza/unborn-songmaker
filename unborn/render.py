@@ -15,6 +15,9 @@ DUCKABLE = {"bass", "bell", "harmonic", "pad"}
 
 
 def resolve_voice(name: str, freq: float, dur: float) -> np.ndarray:
+    if name.startswith("sample:"):
+        from .sampler import render_sample
+        return render_sample(name.split(":", 1)[1], freq, dur)
     fn = ALL_VOICES.get(name, VOICES["bell"])
     return fn(freq, dur)
 
