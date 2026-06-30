@@ -1,0 +1,63 @@
+{
+  "name": "lost_yet_green",
+  "tempo": 114,
+  "ticks_per_beat": 24,
+  "bars": 86,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "house_kick_deep", "amount": 0.38, "release": 0.22 },
+  "reverb": { "amount": 0.4, "decay": 3.0 },
+  "tracks": [
+    { "name": "pad-warm-root", "voice": "pad_warm", "note": 50, "quant": 96, "length": 4, "enter": 0, "exit": 86, "steps": [38, 0, 36, 0] },
+    { "name": "pad-warm-third", "voice": "pad_warm", "note": 54, "quant": 96, "length": 6, "enter": 8, "exit": 84, "steps": [0, 34, 0, 34, 0, 0] },
+    { "name": "pad-glass-fifth", "voice": "pad_glass", "note": 57, "quant": 96, "length": 5, "enter": 16, "exit": 80, "steps": [0, 0, 30, 0, 0] },
+    { "name": "pad-glass-high", "voice": "pad_glass", "note": 62, "quant": 96, "length": 7, "enter": 62, "exit": 80, "steps": [0, 0, 0, 26, 0, 0, 0] },
+
+    { "name": "sub-main", "voice": "subbass", "note": 38, "quant": 12, "length": 8, "enter": 16, "exit": 48, "steps": [0, 76, 0, 76, 0, 76, 0, 84] },
+    { "name": "sub-ghost", "voice": "subbass", "note": 38, "quant": 48, "length": 4, "enter": 48, "exit": 62, "steps": [48, 0, 0, 0] },
+    { "name": "sub-climax", "voice": "subbass", "note": 38, "quant": 12, "length": 8, "enter": 62, "exit": 80, "steps": [0, 80, 0, 80, 0, 80, 0, 90] },
+
+    { "name": "kick-build-drop", "voice": "house_kick_deep", "quant": 24, "length": 4, "enter": 16, "exit": 48, "steps": [80, 80, 80, 80] },
+    { "name": "kick-climax", "voice": "house_kick_deep", "quant": 24, "length": 4, "enter": 62, "exit": 80, "steps": [86, 86, 86, 86] },
+
+    { "name": "hat-offbeat-bd", "voice": "hat_closed_tight", "quant": 12, "length": 8, "swing": 2, "enter": 20, "exit": 48, "steps": [0, 52, 0, 52, 0, 52, 0, 52] },
+    { "name": "hat-offbeat-climax", "voice": "hat_closed_tight", "quant": 12, "length": 8, "swing": 2, "enter": 62, "exit": 80, "steps": [0, 56, 0, 56, 0, 56, 0, 56] },
+
+    { "name": "shaker-soft-17", "voice": "perc_shaker", "quant": 6, "length": 17, "swing": 1, "enter": 8, "exit": 80, "euclid": { "pulses": 11, "length": 17, "velocity": 42 } },
+
+    { "name": "woodblock-bd-11", "voice": "perc_woodblock", "quant": 12, "length": 11, "enter": 24, "exit": 48, "euclid": { "pulses": 4, "length": 11, "velocity": 50 } },
+    { "name": "woodblock-climax-11", "voice": "perc_woodblock", "quant": 12, "length": 11, "enter": 62, "exit": 80, "euclid": { "pulses": 5, "length": 11, "velocity": 54 } },
+    { "name": "rim-bd-13", "voice": "rim_click", "quant": 12, "length": 13, "enter": 32, "exit": 48, "euclid": { "pulses": 3, "length": 13, "velocity": 46 } },
+    { "name": "clap-climax", "voice": "house_clap_layered", "quant": 24, "length": 4, "enter": 62, "exit": 80, "steps": [0, 82, 0, 82] },
+
+    { "name": "waterdrip-pulse-19", "voice": "water_drip", "note": 60, "quant": 12, "length": 19, "enter": 24, "exit": 84, "euclid": { "pulses": 5, "length": 19, "velocity": 40 } },
+
+    { "name": "kalimba-lead", "voice": "kalimba", "note": 62, "quant": 12, "length": 15, "enter": 24, "exit": 84,
+      "steps": [68, 0, 0, 55, 0, 62, 0, 0, 58, 0, 52, 0, 0, 60, 0] },
+
+    { "name": "harp-build-13", "voice": "harp_pluck", "note": 50, "quant": 12, "length": 13, "enter": 16, "exit": 32, "euclid": { "pulses": 5, "length": 13, "velocity": 44 } },
+    { "name": "harp-climax-13", "voice": "harp_pluck", "note": 57, "quant": 12, "length": 13, "enter": 62, "exit": 80, "euclid": { "pulses": 6, "length": 13, "velocity": 48 } },
+
+    { "name": "celesta-drop-17", "voice": "celesta", "note": 74, "quant": 24, "length": 17, "enter": 32, "exit": 48, "euclid": { "pulses": 4, "length": 17, "velocity": 42 } },
+    { "name": "celesta-climax-17", "voice": "celesta", "note": 74, "quant": 24, "length": 17, "enter": 62, "exit": 80, "euclid": { "pulses": 5, "length": 17, "velocity": 46 } },
+
+    { "name": "forest-air-drone", "voice": "forest_air", "note": 36, "quant": 144, "length": 2, "enter": 0, "exit": 86, "steps": [40, 40] },
+    { "name": "leaves-intro", "voice": "leaves_rustle", "note": 48, "quant": 96, "length": 3, "enter": 0, "exit": 16, "steps": [44, 0, 38] },
+    { "name": "water-stream-intro", "voice": "water_stream", "note": 40, "quant": 96, "length": 2, "enter": 0, "exit": 24, "steps": [42, 0] },
+    { "name": "rain-breakdown", "voice": "rain_soft", "note": 36, "quant": 144, "length": 2, "enter": 48, "exit": 62, "steps": [46, 40] },
+    { "name": "leaves-breakdown", "voice": "leaves_rustle", "note": 48, "quant": 96, "length": 3, "enter": 48, "exit": 62, "steps": [42, 0, 36] },
+
+    { "name": "voz-breakdown", "voice": "sample:voz16", "note": 50, "quant": 96, "length": 4, "enter": 50, "exit": 62, "steps": [66, 0, 0, 0],
+      "fx": { "reverse": true, "pitch": -2, "granular": { "grain_ms": 65, "scatter": 0.55 } } },
+
+    { "name": "waterdrip-outro-19", "voice": "water_drip", "note": 60, "quant": 12, "length": 19, "enter": 80, "exit": 86, "euclid": { "pulses": 4, "length": 19, "velocity": 36 } },
+
+    { "name": "melody", "type": "modulator", "note": 0, "quant": 12, "length": 15, "steps": [0, 0, 0, 4, 0, 7, 0, 0, 6, 0, 2, 0, 0, 9, 0] },
+    { "name": "chord", "type": "modulator", "note": 0, "quant": 96, "length": 8, "steps": [0, 0, 0, 0, 2, 2, 0, 0] }
+  ],
+  "modulations": [
+    { "type": "note", "source": 29, "target": 17 },
+    { "type": "note", "source": 30, "target": 0 },
+    { "type": "note", "source": 30, "target": 1 },
+    { "type": "note", "source": 30, "target": 2 }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "cathedrals_and_ruins",
+  "tempo": 120,
+  "ticks_per_beat": 24,
+  "bars": 90,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "house_kick_punchy", "amount": 0.4, "release": 0.2 },
+  "reverb": { "amount": 0.36, "decay": 2.8 },
+  "tracks": [
+    { "name": "pad-center-root", "voice": "pad_warm", "note": 50, "quant": 96, "length": 4, "enter": 0, "exit": 48, "steps": [38, 0, 36, 0] },
+    { "name": "pad-center-third", "voice": "pad_warm", "note": 53, "quant": 96, "length": 6, "enter": 4, "exit": 48, "steps": [0, 34, 0, 34, 0, 0] },
+
+    { "name": "cathedral-organ", "voice": "key_organ", "note": 50, "quant": 12, "length": 7, "enter": 0, "exit": 48, "steps": [55, 0, 50, 0, 52, 0, 48] },
+    { "name": "cathedral-harmonic", "voice": "harmonic", "note": 62, "quant": 48, "length": 7, "enter": 8, "exit": 48, "steps": [0, 0, 40, 0, 0, 36, 0] },
+
+    { "name": "ruin-sub", "voice": "subbass", "note": 38, "quant": 12, "length": 11, "enter": 4, "exit": 48, "steps": [0, 70, 0, 70, 0, 72, 0, 70, 0, 72, 0], "fx": { "drive": 0.3 } },
+    { "name": "ruin-drone-b2", "voice": "harmonic", "note": 51, "quant": 96, "length": 5, "enter": 12, "exit": 48, "steps": [0, 30, 0, 0, 28], "fx": { "drive": 0.25, "crush": 5 } },
+    { "name": "heartbeat-kick", "voice": "house_kick_deep", "quant": 24, "length": 4, "enter": 16, "exit": 24, "steps": [70, 70, 70, 70] },
+
+    { "name": "kick-conflict", "voice": "house_kick_punchy", "quant": 24, "length": 4, "enter": 24, "exit": 48, "steps": [88, 88, 88, 88] },
+    { "name": "hats-mechanical", "voice": "hat_closed_tight", "quant": 6, "length": 16, "swing": 0, "enter": 26, "exit": 48, "euclid": { "pulses": 11, "length": 16, "velocity": 55 } },
+    { "name": "logic-motif", "voice": "lead_square", "note": 57, "quant": 12, "length": 13, "enter": 28, "exit": 48, "steps": [50, 0, 0, 48, 0, 50, 0, 0, 48, 0, 50, 0, 0], "fx": { "bandpass": [600, 2400] } },
+    { "name": "ego-zap", "voice": "zap_blip", "note": 62, "quant": 12, "length": 17, "enter": 32, "exit": 48, "euclid": { "pulses": 5, "length": 17, "velocity": 45 }, "fx": { "ring": 140 } },
+    { "name": "sub-conflict", "voice": "subbass", "note": 38, "quant": 12, "length": 8, "enter": 24, "exit": 48, "steps": [0, 82, 0, 82, 0, 82, 0, 92], "fx": { "drive": 0.35 } },
+    { "name": "clap-conflict", "voice": "house_clap_layered", "quant": 24, "length": 4, "enter": 30, "exit": 48, "steps": [0, 90, 0, 90] },
+    { "name": "organ-escalate", "voice": "key_organ", "note": 57, "quant": 12, "length": 7, "enter": 36, "exit": 48, "steps": [0, 52, 0, 50, 0, 52, 0] },
+    { "name": "harmonic-dissonant", "voice": "harmonic", "note": 63, "quant": 24, "length": 11, "enter": 40, "exit": 48, "steps": [0, 0, 44, 0, 0, 0, 40, 0, 0, 38, 0], "fx": { "drive": 0.2 } },
+
+    { "name": "piano-question", "voice": "piano_soft", "note": 50, "quant": 48, "length": 7, "enter": 48, "exit": 64, "steps": [40, 0, 0, 36, 0, 0, 32] },
+    { "name": "piano-sus2", "voice": "piano_soft", "note": 52, "quant": 96, "length": 5, "enter": 50, "exit": 64, "steps": [0, 34, 0, 0, 30] },
+    { "name": "pad-doubt", "voice": "pad_warm", "note": 45, "quant": 144, "length": 3, "enter": 48, "exit": 64, "steps": [32, 0, 28] },
+    { "name": "voz-inner-doubt", "voice": "sample:voz16", "note": 45, "quant": 96, "length": 5, "enter": 52, "exit": 64, "steps": [40, 0, 0, 36, 0],
+      "fx": { "reverse": true, "pitch": -5, "granular": { "grain_ms": 70, "scatter": 0.5 } } },
+    { "name": "bell-question", "voice": "bell_church", "note": 57, "quant": 96, "length": 7, "enter": 54, "exit": 64, "steps": [0, 0, 0, 38, 0, 0, 0] },
+
+    { "name": "grace-pad-root", "voice": "pad_warm", "note": 50, "quant": 96, "length": 4, "enter": 64, "exit": 90, "steps": [40, 0, 38, 0] },
+    { "name": "grace-pad-third-maj", "voice": "pad_warm", "note": 54, "quant": 96, "length": 6, "enter": 64, "exit": 88, "steps": [0, 36, 0, 36, 0, 0] },
+    { "name": "grace-pad-fifth", "voice": "pad_glass", "note": 57, "quant": 96, "length": 5, "enter": 68, "exit": 86, "steps": [0, 0, 32, 0, 0] },
+    { "name": "cathedral-resolved", "voice": "key_organ", "note": 50, "quant": 12, "length": 7, "enter": 66, "exit": 86, "steps": [50, 0, 46, 0, 48, 0, 44] },
+    { "name": "harmonic-grace", "voice": "harmonic", "note": 66, "quant": 48, "length": 7, "enter": 70, "exit": 86, "steps": [0, 0, 38, 0, 0, 34, 0] },
+    { "name": "bell-grace", "voice": "bell_church", "note": 62, "quant": 96, "length": 11, "enter": 68, "exit": 88, "steps": [40, 0, 0, 0, 0, 38, 0, 0, 0, 0, 0] },
+    { "name": "nylon-humanity", "voice": "pluck_guitar_nylon", "note": 62, "quant": 12, "length": 16, "enter": 70, "exit": 86, "steps": [60, 0, 0, 55, 0, 58, 0, 0, 52, 0, 0, 60, 0, 0, 0, 0] },
+    { "name": "kick-heart-peace", "voice": "house_kick_deep", "quant": 24, "length": 4, "enter": 72, "exit": 84, "steps": [76, 76, 76, 76] },
+    { "name": "sub-grounding", "voice": "subbass", "note": 38, "quant": 12, "length": 8, "enter": 72, "exit": 84, "steps": [0, 72, 0, 72, 0, 72, 0, 80] },
+    { "name": "shaker-grace", "voice": "perc_shaker", "quant": 6, "length": 17, "swing": 1, "enter": 72, "exit": 84, "euclid": { "pulses": 9, "length": 17, "velocity": 40 } },
+
+    { "name": "cathedral-mel", "type": "modulator", "note": 0, "quant": 12, "length": 7, "steps": [0, 4, 7, 9, 7, 4, 0] },
+    { "name": "grace-mel", "type": "modulator", "note": 0, "quant": 12, "length": 16, "steps": [0, 0, 0, 5, 0, 9, 0, 0, 7, 0, 0, 4, 0, 0, 0, 0] }
+  ],
+  "modulations": [
+    { "type": "note", "source": 30, "target": 2 },
+    { "type": "note", "source": 30, "target": 13 },
+    { "type": "note", "source": 30, "target": 23 },
+    { "type": "note", "source": 31, "target": 26 }
+  ]
+}

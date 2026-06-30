@@ -1,0 +1,55 @@
+{
+  "name": "sand_in_the_sun",
+  "tempo": 120,
+  "ticks_per_beat": 24,
+  "bars": 90,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "house_kick_deep", "amount": 0.4, "release": 0.2 },
+  "reverb": { "amount": 0.34, "decay": 2.6 },
+  "tracks": [
+    { "name": "pad-warm-root", "voice": "pad_warm", "note": 45, "quant": 96, "length": 4, "enter": 0, "exit": 90, "steps": [40, 0, 38, 0] },
+    { "name": "pad-warm-fifth", "voice": "pad_warm", "note": 52, "quant": 96, "length": 6, "enter": 8, "exit": 88, "steps": [0, 36, 0, 36, 0, 0] },
+    { "name": "pad-warm-ninth", "voice": "pad_warm", "note": 59, "quant": 144, "length": 5, "enter": 24, "exit": 80, "steps": [0, 0, 30, 0, 0] },
+    { "name": "pad-glass-shimmer", "voice": "pad_glass", "note": 69, "quant": 96, "length": 7, "enter": 64, "exit": 84, "steps": [0, 0, 0, 28, 0, 0, 0] },
+
+    { "name": "sub-main", "voice": "subbass", "note": 33, "quant": 12, "length": 8, "enter": 16, "exit": 48, "steps": [0, 80, 0, 80, 0, 80, 0, 90] },
+    { "name": "sub-ghost", "voice": "subbass", "note": 33, "quant": 48, "length": 4, "enter": 48, "exit": 64, "steps": [52, 0, 0, 0] },
+    { "name": "sub-climax", "voice": "subbass", "note": 33, "quant": 12, "length": 8, "enter": 64, "exit": 84, "steps": [0, 84, 0, 84, 0, 84, 0, 95] },
+
+    { "name": "kick-build-drop", "voice": "house_kick_deep", "quant": 24, "length": 4, "enter": 16, "exit": 48, "steps": [88, 88, 88, 88] },
+    { "name": "kick-climax", "voice": "house_kick_deep", "quant": 24, "length": 4, "enter": 64, "exit": 84, "steps": [94, 94, 94, 94] },
+
+    { "name": "hat-offbeat-bd", "voice": "hat_offbeat_short", "quant": 12, "length": 8, "swing": 3, "enter": 20, "exit": 48, "steps": [0, 62, 0, 62, 0, 62, 0, 62] },
+    { "name": "hat-offbeat-climax", "voice": "hat_offbeat_short", "quant": 12, "length": 8, "swing": 3, "enter": 64, "exit": 84, "steps": [0, 66, 0, 66, 0, 66, 0, 66] },
+
+    { "name": "shaker-warm-17", "voice": "perc_shaker", "quant": 6, "length": 17, "swing": 1, "enter": 8, "exit": 84, "euclid": { "pulses": 11, "length": 17, "velocity": 44 } },
+
+    { "name": "conga-bd-7", "voice": "perc_conga", "quant": 12, "length": 7, "enter": 24, "exit": 48, "euclid": { "pulses": 3, "length": 7, "velocity": 62 } },
+    { "name": "conga-climax-7", "voice": "perc_conga", "quant": 12, "length": 7, "enter": 64, "exit": 84, "euclid": { "pulses": 3, "length": 7, "velocity": 66 } },
+    { "name": "bongo-climax-11", "voice": "perc_bongo", "quant": 12, "length": 11, "enter": 68, "exit": 84, "euclid": { "pulses": 4, "length": 11, "velocity": 55 } },
+
+    { "name": "clap-bd", "voice": "house_clap_layered", "quant": 24, "length": 4, "enter": 32, "exit": 48, "steps": [0, 85, 0, 85] },
+    { "name": "clap-climax", "voice": "house_clap_layered", "quant": 24, "length": 4, "enter": 64, "exit": 84, "steps": [0, 90, 0, 90] },
+
+    { "name": "nylon-lead", "voice": "pluck_guitar_nylon", "note": 57, "quant": 12, "length": 16, "enter": 24, "exit": 88,
+      "steps": [70, 0, 0, 60, 0, 65, 0, 0, 55, 0, 0, 70, 0, 0, 0, 0] },
+
+    { "name": "marimba-bd-13", "voice": "marimba", "note": 69, "quant": 12, "length": 13, "enter": 32, "exit": 48, "euclid": { "pulses": 4, "length": 13, "velocity": 50 } },
+    { "name": "marimba-climax-13", "voice": "marimba", "note": 72, "quant": 12, "length": 13, "enter": 64, "exit": 84, "euclid": { "pulses": 5, "length": 13, "velocity": 55 } },
+
+    { "name": "ocean-intro", "voice": "ocean_wave", "note": 36, "quant": 96, "length": 3, "enter": 0, "exit": 24, "steps": [58, 0, 50] },
+    { "name": "ocean-breakdown", "voice": "ocean_wave", "note": 36, "quant": 96, "length": 3, "enter": 48, "exit": 64, "steps": [56, 0, 48] },
+    { "name": "ocean-outro", "voice": "ocean_wave", "note": 36, "quant": 96, "length": 3, "enter": 84, "exit": 90, "steps": [54, 0, 46] },
+
+    { "name": "voz-breakdown", "voice": "sample:voz16", "note": 45, "quant": 96, "length": 4, "enter": 50, "exit": 64, "steps": [70, 0, 0, 0],
+      "fx": { "reverse": true, "pitch": -3, "granular": { "grain_ms": 60, "scatter": 0.5 } } },
+
+    { "name": "melody", "type": "modulator", "note": 0, "quant": 12, "length": 16, "steps": [0, 0, 0, 5, 0, 9, 0, 0, 7, 0, 0, 3, 0, 0, 0, 0] },
+    { "name": "chord", "type": "modulator", "note": 0, "quant": 96, "length": 8, "steps": [0, 0, -2, -2, -4, -4, -2, -2] }
+  ],
+  "modulations": [
+    { "type": "note", "source": 24, "target": 17 },
+    { "type": "note", "source": 25, "target": 0 },
+    { "type": "note", "source": 25, "target": 1 }
+  ]
+}

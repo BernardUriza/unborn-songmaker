@@ -1,0 +1,48 @@
+{
+  "name": "to_forge_raining",
+  "tempo": 110,
+  "ticks_per_beat": 24,
+  "bars": 88,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "house_kick_deep", "amount": 0.35, "release": 0.25 },
+  "reverb": { "amount": 0.45, "decay": 3.5 },
+  "tracks": [
+    { "name": "rain-bed", "voice": "rain_soft", "note": 36, "quant": 96, "length": 3, "enter": 0, "exit": 88, "steps": [52, 44, 48] },
+    { "name": "rain-density", "voice": "steam_hiss", "note": 30, "quant": 144, "length": 2, "enter": 0, "exit": 88, "steps": [32, 28] },
+
+    { "name": "organ-ostinato", "voice": "key_organ", "note": 40, "quant": 12, "length": 8, "enter": 0, "exit": 40, "steps": [58, 0, 52, 0, 55, 0, 50, 0] },
+    { "name": "organ-ostinato-p2", "voice": "key_organ", "note": 40, "quant": 12, "length": 8, "enter": 48, "exit": 80, "steps": [58, 0, 52, 0, 55, 0, 50, 0] },
+    { "name": "organ-break-sustain", "voice": "key_organ", "note": 40, "quant": 96, "length": 3, "enter": 40, "exit": 48, "steps": [40, 0, 36] },
+    { "name": "pad-dark-drone", "voice": "pad_warm", "note": 28, "quant": 144, "length": 2, "enter": 0, "exit": 80, "steps": [40, 36] },
+
+    { "name": "sub-groove-p1", "voice": "subbass", "note": 28, "quant": 12, "length": 8, "enter": 8, "exit": 40, "steps": [0, 76, 0, 76, 0, 76, 0, 82] },
+    { "name": "kick-p1", "voice": "house_kick_deep", "quant": 24, "length": 4, "enter": 12, "exit": 40, "steps": [74, 74, 74, 74] },
+
+    { "name": "voz-ether1", "voice": "sample:voz16", "note": 35, "quant": 96, "length": 5, "enter": 16, "exit": 80, "steps": [42, 0, 0, 38, 0],
+      "fx": { "reverse": true, "pitch": -6, "granular": { "grain_ms": 80, "scatter": 0.6 } } },
+    { "name": "voz-ether2", "voice": "sample:voz6", "note": 31, "quant": 144, "length": 4, "enter": 24, "exit": 80, "steps": [40, 0, 36, 0],
+      "fx": { "pitch": -7, "granular": { "grain_ms": 90, "scatter": 0.5 } } },
+
+    { "name": "sub-groove-p2", "voice": "subbass", "note": 28, "quant": 12, "length": 8, "enter": 48, "exit": 80, "steps": [0, 82, 0, 82, 0, 82, 0, 92] },
+    { "name": "kick-p2", "voice": "house_kick_deep", "quant": 24, "length": 4, "enter": 48, "exit": 80, "steps": [82, 82, 82, 82] },
+
+    { "name": "pad-open-ominous", "voice": "pad_glass", "note": 52, "quant": 96, "length": 6, "enter": 48, "exit": 80, "steps": [0, 32, 0, 36, 0, 0] },
+    { "name": "harmonic-ominous-b2", "voice": "harmonic", "note": 53, "quant": 48, "length": 7, "enter": 50, "exit": 80, "steps": [0, 0, 42, 0, 0, 38, 0] },
+    { "name": "organ-ominous-hi", "voice": "key_organ", "note": 52, "quant": 12, "length": 8, "enter": 52, "exit": 80, "steps": [0, 48, 0, 44, 0, 48, 0, 44] },
+
+    { "name": "wind-swell-into-p2", "voice": "wind_gust", "note": 34, "quant": 96, "length": 3, "enter": 45, "exit": 48, "steps": [0, 48, 66],
+      "fx": { "reverse": true } },
+    { "name": "tom-fill-reentry", "voice": "perc_tom_low", "quant": 6, "length": 8, "enter": 47, "exit": 48, "steps": [0, 0, 40, 0, 56, 0, 74, 94] },
+
+    { "name": "light-accel", "voice": "celesta", "note": 72, "quant": 6, "length": 8, "enter": 86, "exit": 88, "steps": [40, 52, 64, 76, 88, 100, 112, 120] },
+    { "name": "light-shine", "voice": "pad_glass", "note": 76, "quant": 24, "length": 2, "enter": 87, "exit": 88, "steps": [70, 90] },
+
+    { "name": "ostinato-mel", "type": "modulator", "note": 0, "quant": 12, "length": 8, "steps": [0, 0, 1, 0, 3, 0, 1, 0] },
+    { "name": "light-rise", "type": "modulator", "note": 0, "quant": 6, "length": 8, "steps": [0, 2, 3, 5, 7, 8, 10, 12] }
+  ],
+  "modulations": [
+    { "type": "note", "source": 19, "target": 2 },
+    { "type": "note", "source": 19, "target": 3 },
+    { "type": "note", "source": 20, "target": 17 }
+  ]
+}
