@@ -71,8 +71,9 @@ class Sequencer:
                     note = track.note + self._mod_value(MOD_NOTE, ti, global_step)
                     velocity = min(127, max(1, vel + track.velocity
                                             + self._mod_value(MOD_VELOCITY, ti, global_step)))
+                    swing = track.swing if (global_step % 2 == 1) else 0
                     events.append(NoteEvent(
-                        time=tick * spt,
+                        time=(tick + swing) * spt,
                         note=note,
                         velocity=velocity,
                         duration=track.quant * spt * 0.9,

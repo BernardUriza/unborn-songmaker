@@ -1,0 +1,67 @@
+{
+  "name": "techno",
+  "tempo": 126,
+  "ticks_per_beat": 24,
+  "bars": 8,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "kick", "amount": 0.38, "release": 0.16 },
+  "tracks": [
+    {
+      "name": "kick",
+      "voice": "kick",
+      "quant": 24,
+      "length": 4,
+      "steps": [112, 112, 112, 112]
+    },
+    {
+      "name": "clap",
+      "voice": "clap",
+      "quant": 24,
+      "length": 4,
+      "steps": [0, 100, 0, 100]
+    },
+    {
+      "name": "hats-closed",
+      "voice": "hat",
+      "quant": 6,
+      "length": 16,
+      "swing": 2,
+      "steps": [60, 70, 60, 80, 60, 70, 60, 90, 60, 70, 60, 80, 60, 70, 60, 95]
+    },
+    {
+      "name": "hat-open-offbeat",
+      "voice": "hat_open",
+      "quant": 12,
+      "length": 8,
+      "swing": 3,
+      "steps": [0, 85, 0, 85, 0, 85, 0, 85]
+    },
+    {
+      "name": "bass",
+      "voice": "bass",
+      "note": 36,
+      "quant": 12,
+      "length": 8,
+      "steps": [0, 100, 0, 100, 0, 100, 0, 110]
+    },
+    {
+      "name": "bell-7",
+      "voice": "bell",
+      "note": 75,
+      "quant": 12,
+      "length": 7,
+      "euclid": { "pulses": 3, "length": 7, "velocity": 70 }
+    },
+    {
+      "name": "drift",
+      "type": "modulator",
+      "note": 0,
+      "quant": 12,
+      "length": 5,
+      "steps": [0, 1, 2, 1, 0]
+    }
+  ],
+  "modulations": [
+    { "type": "position", "source": 6, "target": 5 }
+  ]
+}

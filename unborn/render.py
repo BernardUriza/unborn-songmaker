@@ -6,23 +6,56 @@ import wave
 
 import numpy as np
 
+from .drums import DRUM_VOICES
 from .sequencer import NoteEvent
-from .synth import SR, midi_to_freq, render_voice
+from .synth import SR, VOICES, midi_to_freq
+
+ALL_VOICES = {**VOICES, **DRUM_VOICES}
+DUCKABLE = {"bass", "bell", "harmonic", "pad"}
 
 
-def mix(events: list[NoteEvent], tail: float = 1.5) -> np.ndarray:
+def resolve_voice(name: str, freq: float, dur: float) -> np.ndarray:
+    fn = ALL_VOICES.get(name, VOICES["bell"])
+    return fn(freq, dur)
+
+
+def _bus(events: list[NoteEvent], n: int) -> np.ndarray:
+    buf = np.zeros(n, dtype=np.float64)
+    for e in events:
+        wave_data = resolve_voice(e.voice, midi_to_freq(e.note), e.duration) * (e.velocity / 127.0)
+        start = int(e.time * SR)
+        stop = min(start + len(wave_data), n)
+        buf[start:stop] += wave_data[: stop - start]
+    return buf
+
+
+def _duck_envelope(kick_times: list[float], n: int, amount: float, release: float) -> np.ndarray:
+    env = np.ones(n, dtype=np.float64)
+    rel = max(1, int(release * SR))
+    recover = 1.0 - (1.0 - amount) * np.exp(-np.arange(rel) / (rel / 4))
+    for kt in kick_times:
+        i = int(kt * SR)
+        seg = min(rel, n - i)
+        if seg > 0:
+            env[i:i + seg] = np.minimum(env[i:i + seg], recover[:seg])
+    return env
+
+
+def mix(events: list[NoteEvent], tail: float = 1.5, sidechain: dict | None = None) -> np.ndarray:
     if not events:
         return np.zeros(SR, dtype=np.float64)
     end = max(e.time + e.duration for e in events) + tail
-    master = np.zeros(int(SR * end) + 1, dtype=np.float64)
-    for e in events:
-        wave_data = render_voice(e.voice, midi_to_freq(e.note), e.duration) * (e.velocity / 127.0)
-        start = int(e.time * SR)
-        stop = start + len(wave_data)
-        if stop > len(master):
-            wave_data = wave_data[: len(master) - start]
-            stop = len(master)
-        master[start:stop] += wave_data
+    n = int(SR * end) + 1
+    if sidechain:
+        src = sidechain.get("source_voice", "kick")
+        kick_times = [e.time for e in events if e.voice == src]
+        ducked = [e for e in events if e.voice in DUCKABLE]
+        dry = [e for e in events if e.voice not in DUCKABLE]
+        env = _duck_envelope(kick_times, n, sidechain.get("amount", 0.45),
+                             sidechain.get("release", 0.18))
+        master = _bus(dry, n) + _bus(ducked, n) * env
+    else:
+        master = _bus(events, n)
     peak = np.max(np.abs(master))
     if peak > 0:
         master = master / peak * 0.89

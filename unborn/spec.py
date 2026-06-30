@@ -42,6 +42,7 @@ def track_from(spec: dict) -> Track:
         length=spec.get("length", len(steps) or 16),
         quant=spec.get("quant", 30),
         offset=spec.get("offset", 0),
+        swing=spec.get("swing", 0),
         velocity=spec.get("velocity", 0),
         voice=spec.get("voice", "bell"),
         steps=steps,

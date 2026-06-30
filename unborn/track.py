@@ -25,6 +25,7 @@ class Track:
     length: int = 16
     quant: int = 30
     offset: int = 0
+    swing: int = 0
     velocity: int = 0
     voice: str = "bell"
     steps: list[int] = field(default_factory=list)
