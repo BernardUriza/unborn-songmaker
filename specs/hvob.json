@@ -1,0 +1,84 @@
+{
+  "name": "hvob",
+  "tempo": 122,
+  "ticks_per_beat": 24,
+  "bars": 8,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "kick", "amount": 0.5, "release": 0.22 },
+  "reverb": { "amount": 0.26, "decay": 2.0 },
+  "tracks": [
+    {
+      "name": "kick",
+      "voice": "kick",
+      "quant": 24,
+      "length": 4,
+      "steps": [92, 92, 92, 92]
+    },
+    {
+      "name": "sub",
+      "voice": "subbass",
+      "note": 36,
+      "quant": 12,
+      "length": 8,
+      "steps": [90, 90, 90, 90, 90, 90, 90, 90]
+    },
+    {
+      "name": "hats",
+      "voice": "hat",
+      "quant": 6,
+      "length": 16,
+      "swing": 3,
+      "steps": [0, 48, 0, 60, 0, 48, 0, 70, 0, 48, 0, 60, 0, 48, 0, 75]
+    },
+    {
+      "name": "rim",
+      "voice": "clap",
+      "quant": 24,
+      "length": 4,
+      "steps": [0, 60, 0, 60]
+    },
+    {
+      "name": "pad-root-2",
+      "voice": "pad",
+      "note": 48,
+      "quant": 48,
+      "length": 2,
+      "steps": [66, 66]
+    },
+    {
+      "name": "pad-min3-3",
+      "voice": "pad",
+      "note": 51,
+      "quant": 48,
+      "length": 3,
+      "euclid": { "pulses": 2, "length": 3, "velocity": 58 }
+    },
+    {
+      "name": "pad-5th-5",
+      "voice": "pad",
+      "note": 55,
+      "quant": 48,
+      "length": 5,
+      "euclid": { "pulses": 3, "length": 5, "velocity": 54 }
+    },
+    {
+      "name": "lead-7",
+      "voice": "bell",
+      "note": 63,
+      "quant": 12,
+      "length": 7,
+      "euclid": { "pulses": 3, "length": 7, "velocity": 58 }
+    },
+    {
+      "name": "drift",
+      "type": "modulator",
+      "note": 0,
+      "quant": 12,
+      "length": 5,
+      "steps": [0, 1, 2, 1, 0]
+    }
+  ],
+  "modulations": [
+    { "type": "position", "source": 8, "target": 7 }
+  ]
+}

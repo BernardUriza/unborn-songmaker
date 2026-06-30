@@ -1,0 +1,78 @@
+{
+  "name": "explore",
+  "tempo": 120,
+  "ticks_per_beat": 24,
+  "bars": 32,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "kick", "amount": 0.34, "release": 0.18 },
+  "reverb": { "amount": 0.16, "decay": 2.6 },
+  "tracks": [
+    {
+      "name": "dry-kick",
+      "voice": "kick",
+      "quant": 24,
+      "length": 4,
+      "steps": [104, 104, 104, 104]
+    },
+    {
+      "name": "sub-constant",
+      "voice": "subbass",
+      "note": 36,
+      "quant": 96,
+      "length": 4,
+      "steps": [86, 82, 86, 80]
+    },
+    {
+      "name": "hat-5",
+      "voice": "hat",
+      "quant": 6,
+      "length": 16,
+      "swing": 2,
+      "euclid": { "pulses": 5, "length": 16, "velocity": 48 }
+    },
+    {
+      "name": "hat-7",
+      "voice": "hat",
+      "quant": 6,
+      "length": 16,
+      "swing": 2,
+      "offset": 3,
+      "euclid": { "pulses": 7, "length": 16, "velocity": 34 }
+    },
+    {
+      "name": "open-air",
+      "voice": "hat_open",
+      "quant": 12,
+      "length": 16,
+      "swing": 2,
+      "steps": [0, 0, 38, 0, 0, 0, 30, 0, 0, 34, 0, 0, 0, 0, 42, 0]
+    },
+    {
+      "name": "long-drift-root",
+      "voice": "pad",
+      "note": 48,
+      "quant": 192,
+      "length": 5,
+      "steps": [38, 0, 34, 0, 36]
+    },
+    {
+      "name": "distant-bell-7",
+      "voice": "bell",
+      "note": 72,
+      "quant": 24,
+      "length": 7,
+      "euclid": { "pulses": 2, "length": 7, "velocity": 42 }
+    },
+    {
+      "name": "drift",
+      "type": "modulator",
+      "note": 0,
+      "quant": 24,
+      "length": 11,
+      "steps": [0, 0, 1, 0, 2, 1, 0, -1, 0, 1, 0]
+    }
+  ],
+  "modulations": [
+    { "type": "position", "source": 7, "target": 6 }
+  ]
+}

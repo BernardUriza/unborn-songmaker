@@ -5,13 +5,27 @@ import subprocess
 import wave
 
 import numpy as np
+from scipy import signal
 
 from .drums import DRUM_VOICES
 from .sequencer import NoteEvent
 from .synth import SR, VOICES, midi_to_freq
 
 ALL_VOICES = {**VOICES, **DRUM_VOICES}
-DUCKABLE = {"bass", "bell", "harmonic", "pad"}
+DUCKABLE = {"bass", "subbass", "bell", "harmonic", "pad"}
+VOICE_GAIN = {
+    "kick": 0.85, "subbass": 0.5, "bass": 0.7, "hat": 0.55, "hat_open": 0.45,
+    "clap": 0.7, "bell": 1.7, "harmonic": 1.5, "pad": 2.0,
+}
+
+
+def reverb(x: np.ndarray, amount: float = 0.22, decay: float = 1.8) -> np.ndarray:
+    n = int(SR * decay)
+    rng = np.random.default_rng(1)
+    ir = rng.standard_normal(n) * np.exp(-np.arange(n) / (decay * SR / 5))
+    ir /= np.sqrt(np.sum(ir ** 2)) or 1.0
+    wet = np.asarray(signal.fftconvolve(x, ir), dtype=np.float64)[: len(x)]
+    return (1.0 - amount) * x + amount * wet
 
 
 def resolve_voice(name: str, freq: float, dur: float) -> np.ndarray:
@@ -25,7 +39,8 @@ def resolve_voice(name: str, freq: float, dur: float) -> np.ndarray:
 def _bus(events: list[NoteEvent], n: int) -> np.ndarray:
     buf = np.zeros(n, dtype=np.float64)
     for e in events:
-        wave_data = resolve_voice(e.voice, midi_to_freq(e.note), e.duration) * (e.velocity / 127.0)
+        gain = VOICE_GAIN.get(e.voice, 1.0)
+        wave_data = resolve_voice(e.voice, midi_to_freq(e.note), e.duration) * (e.velocity / 127.0) * gain
         start = int(e.time * SR)
         stop = min(start + len(wave_data), n)
         buf[start:stop] += wave_data[: stop - start]
@@ -44,7 +59,8 @@ def _duck_envelope(kick_times: list[float], n: int, amount: float, release: floa
     return env
 
 
-def mix(events: list[NoteEvent], tail: float = 1.5, sidechain: dict | None = None) -> np.ndarray:
+def mix(events: list[NoteEvent], tail: float = 1.5, sidechain: dict | None = None,
+        rev: dict | None = None) -> np.ndarray:
     if not events:
         return np.zeros(SR, dtype=np.float64)
     end = max(e.time + e.duration for e in events) + tail
@@ -59,6 +75,8 @@ def mix(events: list[NoteEvent], tail: float = 1.5, sidechain: dict | None = Non
         master = _bus(dry, n) + _bus(ducked, n) * env
     else:
         master = _bus(events, n)
+    if rev:
+        master = reverb(master, rev.get("amount", 0.22), rev.get("decay", 1.8))
     peak = np.max(np.abs(master))
     if peak > 0:
         master = master / peak * 0.89

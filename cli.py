@@ -42,7 +42,7 @@ def cmd_sculpture(path: str) -> None:
     events = seq.run(bars=bars, beats_per_bar=spec.get("beats_per_bar", 4))
     print(f"  {len(events)} notes from {len(seq.tracks)} tracks, {len(seq.modulations)} modulations")
     name = spec.get("name") or os.path.splitext(os.path.basename(path))[0]
-    emit(name, mix(events, sidechain=spec.get("sidechain")))
+    emit(name, mix(events, sidechain=spec.get("sidechain"), rev=spec.get("reverb")))
 
 
 def main() -> None:

@@ -54,7 +54,19 @@ def pad_voice(freq: float, dur: float) -> np.ndarray:
     return sig * env
 
 
-VOICES = {"bell": bell_voice, "harmonic": harmonic_voice, "pad": pad_voice}
+def subbass_voice(freq: float, dur: float) -> np.ndarray:
+    t = time_axis(dur)
+    sig = np.sin(2 * np.pi * freq * t) + 0.18 * np.sin(2 * np.pi * freq * 2 * t)
+    env = soft_attack(np.ones_like(t), ms=8.0)
+    rel = min(len(env), int(SR * 0.05))
+    env[-rel:] *= np.linspace(1.0, 0.0, rel)
+    return np.tanh(sig * env * 1.2) * 0.7
+
+
+VOICES = {
+    "bell": bell_voice, "harmonic": harmonic_voice, "pad": pad_voice,
+    "subbass": subbass_voice,
+}
 
 
 def render_voice(name: str, freq: float, dur: float) -> np.ndarray:
