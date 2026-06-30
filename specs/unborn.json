@@ -1,0 +1,44 @@
+{
+  "name": "unborn",
+  "tempo": 104,
+  "ticks_per_beat": 24,
+  "bars": 8,
+  "beats_per_bar": 4,
+  "tracks": [
+    {
+      "name": "bell-7",
+      "voice": "bell",
+      "note": 60,
+      "quant": 24,
+      "length": 7,
+      "euclid": { "pulses": 3, "length": 7, "velocity": 104 }
+    },
+    {
+      "name": "bell-11",
+      "voice": "harmonic",
+      "note": 67,
+      "quant": 24,
+      "length": 11,
+      "euclid": { "pulses": 4, "length": 11, "velocity": 88 }
+    },
+    {
+      "name": "pad-13",
+      "voice": "pad",
+      "note": 48,
+      "quant": 48,
+      "length": 13,
+      "euclid": { "pulses": 5, "length": 13, "velocity": 72 }
+    },
+    {
+      "name": "drift",
+      "type": "modulator",
+      "note": 0,
+      "quant": 24,
+      "length": 5,
+      "steps": [0, 1, 2, 1, 0]
+    }
+  ],
+  "modulations": [
+    { "type": "position", "source": 3, "target": 0 }
+  ]
+}
