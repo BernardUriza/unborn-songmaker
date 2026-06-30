@@ -1,0 +1,26 @@
+{
+  "name": "hollow",
+  "tempo": 120,
+  "ticks_per_beat": 24,
+  "bars": 16,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "house_kick_deep", "amount": 0.5, "release": 0.22 },
+  "reverb": { "amount": 0.3, "decay": 2.2 },
+  "tracks": [
+    { "name": "kick", "voice": "house_kick_deep", "quant": 24, "length": 4, "enter": 2, "exit": 14, "steps": [90, 90, 90, 90] },
+    { "name": "sub", "voice": "subbass", "note": 36, "quant": 12, "length": 8, "enter": 4, "exit": 14,
+      "steps": [0, 80, 0, 80, 0, 80, 0, 88] },
+    { "name": "hat", "voice": "hat_offbeat_short", "quant": 12, "length": 8, "swing": 3, "enter": 6, "exit": 14,
+      "steps": [0, 70, 0, 70, 0, 70, 0, 70] },
+    { "name": "pad", "voice": "pad", "note": 48, "quant": 96, "length": 2, "steps": [50, 50] },
+    { "name": "rhodes", "voice": "ep_rhodes", "note": 60, "quant": 12, "length": 7, "enter": 0, "exit": 16,
+      "euclid": { "pulses": 4, "length": 7, "velocity": 70 } },
+    { "name": "voz-rev", "voice": "sample:voz16", "note": 55, "quant": 48, "length": 5, "enter": 8, "exit": 16,
+      "steps": [80, 0, 0, 70, 0],
+      "fx": { "reverse": true, "pitch": -4, "granular": { "grain_ms": 55, "scatter": 0.6 }, "drive": 0.25 } },
+    { "name": "melody", "type": "modulator", "note": 0, "quant": 12, "length": 7, "steps": [0, 3, 7, 10, 7, 5, 3] }
+  ],
+  "modulations": [
+    { "type": "note", "source": 6, "target": 4 }
+  ]
+}
