@@ -15,6 +15,7 @@ class NoteEvent:
     velocity: int
     duration: float
     voice: str
+    fx: dict | None = None
 
 
 class Sequencer:
@@ -78,6 +79,7 @@ class Sequencer:
                         velocity=velocity,
                         duration=track.quant * spt * 0.9,
                         voice=track.voice,
+                        fx=track.fx,
                     ))
                 tick += track.quant
                 global_step += 1

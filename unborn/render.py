@@ -40,7 +40,11 @@ def _bus(events: list[NoteEvent], n: int) -> np.ndarray:
     buf = np.zeros(n, dtype=np.float64)
     for e in events:
         gain = VOICE_GAIN.get(e.voice, 1.0)
-        wave_data = resolve_voice(e.voice, midi_to_freq(e.note), e.duration) * (e.velocity / 127.0) * gain
+        wave_data = resolve_voice(e.voice, midi_to_freq(e.note), e.duration)
+        if e.fx:
+            from .fx import apply_fx
+            wave_data = apply_fx(wave_data, e.fx)
+        wave_data = wave_data * (e.velocity / 127.0) * gain
         start = int(e.time * SR)
         stop = min(start + len(wave_data), n)
         buf[start:stop] += wave_data[: stop - start]

@@ -1,0 +1,33 @@
+{
+  "name": "voz",
+  "tempo": 122,
+  "ticks_per_beat": 24,
+  "bars": 8,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "kick", "amount": 0.5, "release": 0.22 },
+  "reverb": { "amount": 0.3, "decay": 2.2 },
+  "tracks": [
+    { "name": "kick", "voice": "kick", "quant": 24, "length": 4, "steps": [90, 90, 90, 90] },
+    { "name": "sub", "voice": "subbass", "note": 36, "quant": 12, "length": 8, "steps": [88, 88, 88, 88, 88, 88, 88, 88] },
+    { "name": "hats", "voice": "hat", "quant": 6, "length": 16, "swing": 3,
+      "steps": [0, 48, 0, 60, 0, 48, 0, 70, 0, 48, 0, 60, 0, 48, 0, 75] },
+    { "name": "pad-root", "voice": "pad", "note": 48, "quant": 48, "length": 2, "steps": [60, 60] },
+    { "name": "pad-5th", "voice": "pad", "note": 55, "quant": 48, "length": 5,
+      "euclid": { "pulses": 3, "length": 5, "velocity": 50 } },
+
+    { "name": "voz1-7", "voice": "sample:voz1", "note": 60, "quant": 12, "length": 7,
+      "steps": [110, 0, 0, 95, 0, 0, 0],
+      "fx": { "drive": 0.55, "bandpass": [400, 3000] } },
+    { "name": "voz2-5", "voice": "sample:voz2", "note": 55, "quant": 24, "length": 5,
+      "steps": [0, 100, 0, 0, 90],
+      "fx": { "ring": 55, "drive": 0.4 } },
+    { "name": "voz3-3", "voice": "sample:voz3", "note": 48, "quant": 48, "length": 3,
+      "steps": [0, 100, 0],
+      "fx": { "crush": 5, "downsample": 3, "drive": 0.3 } },
+
+    { "name": "drift", "type": "modulator", "note": 0, "quant": 12, "length": 5, "steps": [0, 1, 2, 1, 0] }
+  ],
+  "modulations": [
+    { "type": "position", "source": 8, "target": 5 }
+  ]
+}

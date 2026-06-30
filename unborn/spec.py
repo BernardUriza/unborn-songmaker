@@ -47,6 +47,7 @@ def track_from(spec: dict) -> Track:
         voice=spec.get("voice", "bell"),
         steps=steps,
         mute=spec.get("mute", False),
+        fx=spec.get("fx"),
     )
 
 

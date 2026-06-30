@@ -1,0 +1,60 @@
+{
+  "name": "ending",
+  "tempo": 108,
+  "ticks_per_beat": 24,
+  "bars": 24,
+  "beats_per_bar": 4,
+  "reverb": { "amount": 0.36, "decay": 3.8 },
+  "tracks": [
+    {
+      "name": "last-low-pulse",
+      "voice": "subbass",
+      "note": 36,
+      "quant": 96,
+      "length": 8,
+      "steps": [72, 0, 0, 0, 62, 0, 0, 0]
+    },
+    {
+      "name": "plain-bell-root",
+      "voice": "bell",
+      "note": 60,
+      "quant": 96,
+      "length": 13,
+      "euclid": { "pulses": 3, "length": 13, "velocity": 38 }
+    },
+    {
+      "name": "plain-bell-fifth",
+      "voice": "harmonic",
+      "note": 67,
+      "quant": 192,
+      "length": 11,
+      "euclid": { "pulses": 2, "length": 11, "velocity": 28 }
+    },
+    {
+      "name": "soft-air",
+      "voice": "hat_open",
+      "quant": 96,
+      "length": 16,
+      "steps": [0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0]
+    },
+    {
+      "name": "settled-pad",
+      "voice": "pad",
+      "note": 48,
+      "quant": 192,
+      "length": 4,
+      "steps": [30, 0, 26, 0]
+    },
+    {
+      "name": "settle",
+      "type": "modulator",
+      "note": 0,
+      "quant": 96,
+      "length": 5,
+      "steps": [0, 0, 1, 0, -1]
+    }
+  ],
+  "modulations": [
+    { "type": "position", "source": 5, "target": 1 }
+  ]
+}

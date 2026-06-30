@@ -1,0 +1,78 @@
+{
+  "name": "terminal",
+  "tempo": 112,
+  "ticks_per_beat": 24,
+  "bars": 24,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "kick", "amount": 0.18, "release": 0.26 },
+  "reverb": { "amount": 0.34, "decay": 3.4 },
+  "tracks": [
+    {
+      "name": "thin-kick",
+      "voice": "kick",
+      "quant": 24,
+      "length": 16,
+      "steps": [72, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 58, 0, 0, 0, 0]
+    },
+    {
+      "name": "low-pulse-11",
+      "voice": "subbass",
+      "note": 34,
+      "quant": 48,
+      "length": 11,
+      "euclid": { "pulses": 3, "length": 11, "velocity": 76 }
+    },
+    {
+      "name": "noise-clicks",
+      "voice": "hat",
+      "quant": 12,
+      "length": 16,
+      "swing": 2,
+      "steps": [0, 22, 0, 0, 26, 0, 0, 18, 0, 0, 24, 0, 0, 0, 20, 0]
+    },
+    {
+      "name": "filtered-air",
+      "voice": "hat_open",
+      "quant": 24,
+      "length": 13,
+      "offset": 6,
+      "euclid": { "pulses": 3, "length": 13, "velocity": 24 }
+    },
+    {
+      "name": "metal-13",
+      "voice": "bell",
+      "note": 67,
+      "quant": 24,
+      "length": 13,
+      "euclid": { "pulses": 4, "length": 13, "velocity": 44 }
+    },
+    {
+      "name": "distant-metal-7",
+      "voice": "harmonic",
+      "note": 74,
+      "quant": 48,
+      "length": 7,
+      "euclid": { "pulses": 2, "length": 7, "velocity": 34 }
+    },
+    {
+      "name": "approach-pad",
+      "voice": "pad",
+      "note": 46,
+      "quant": 192,
+      "length": 5,
+      "steps": [34, 0, 36, 0, 32]
+    },
+    {
+      "name": "confession-drift",
+      "type": "modulator",
+      "note": 0,
+      "quant": 24,
+      "length": 7,
+      "steps": [0, 1, 0, -1, 0, 2, 0]
+    }
+  ],
+  "modulations": [
+    { "type": "position", "source": 7, "target": 4 },
+    { "type": "position", "source": 7, "target": 5 }
+  ]
+}

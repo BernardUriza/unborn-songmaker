@@ -1,0 +1,107 @@
+{
+  "name": "pressure",
+  "tempo": 126,
+  "ticks_per_beat": 24,
+  "bars": 32,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "kick", "amount": 0.48, "release": 0.14 },
+  "reverb": { "amount": 0.22, "decay": 2.2 },
+  "tracks": [
+    {
+      "name": "fixed-kick",
+      "voice": "kick",
+      "quant": 24,
+      "length": 4,
+      "steps": [112, 112, 112, 112]
+    },
+    {
+      "name": "sub-7",
+      "voice": "subbass",
+      "note": 35,
+      "quant": 24,
+      "length": 7,
+      "euclid": { "pulses": 4, "length": 7, "velocity": 86 }
+    },
+    {
+      "name": "bass-11",
+      "voice": "bass",
+      "note": 47,
+      "quant": 12,
+      "length": 11,
+      "euclid": { "pulses": 5, "length": 11, "velocity": 82 }
+    },
+    {
+      "name": "hat-5-16",
+      "voice": "hat",
+      "quant": 6,
+      "length": 16,
+      "swing": 2,
+      "euclid": { "pulses": 5, "length": 16, "velocity": 52 }
+    },
+    {
+      "name": "hat-7-16-offset",
+      "voice": "hat",
+      "quant": 6,
+      "length": 16,
+      "swing": 2,
+      "offset": 2,
+      "euclid": { "pulses": 7, "length": 16, "velocity": 44 }
+    },
+    {
+      "name": "open-9-16",
+      "voice": "hat_open",
+      "quant": 6,
+      "length": 16,
+      "swing": 2,
+      "offset": 5,
+      "euclid": { "pulses": 9, "length": 16, "velocity": 36 }
+    },
+    {
+      "name": "metal-7",
+      "voice": "bell",
+      "note": 69,
+      "quant": 12,
+      "length": 7,
+      "euclid": { "pulses": 3, "length": 7, "velocity": 46 }
+    },
+    {
+      "name": "metal-13",
+      "voice": "harmonic",
+      "note": 57,
+      "quant": 24,
+      "length": 13,
+      "euclid": { "pulses": 5, "length": 13, "velocity": 40 }
+    },
+    {
+      "name": "beating-drone",
+      "voice": "pad",
+      "note": 43,
+      "quant": 96,
+      "length": 11,
+      "euclid": { "pulses": 6, "length": 11, "velocity": 34 }
+    },
+    {
+      "name": "slip",
+      "type": "modulator",
+      "note": 0,
+      "quant": 12,
+      "length": 13,
+      "steps": [0, 1, 0, 2, 1, 0, -1, 0, 1, 0, -2, 0, 1]
+    },
+    {
+      "name": "density",
+      "type": "modulator",
+      "note": 0,
+      "quant": 6,
+      "length": 7,
+      "steps": [0, 4, 0, -3, 0, 3, -2]
+    }
+  ],
+  "modulations": [
+    { "type": "position", "source": 9, "target": 2 },
+    { "type": "position", "source": 9, "target": 6 },
+    { "type": "position", "source": 9, "target": 7 },
+    { "type": "velocity", "source": 10, "target": 3 },
+    { "type": "velocity", "source": 10, "target": 4 }
+  ]
+}

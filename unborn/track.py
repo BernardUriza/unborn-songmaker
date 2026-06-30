@@ -30,6 +30,7 @@ class Track:
     voice: str = "bell"
     steps: list[int] = field(default_factory=list)
     mute: bool = False
+    fx: dict | None = None
 
     def step_at(self, index: int) -> int:
         if not self.steps:

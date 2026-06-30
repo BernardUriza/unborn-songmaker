@@ -1,0 +1,86 @@
+{
+  "name": "dream",
+  "tempo": 84,
+  "ticks_per_beat": 24,
+  "bars": 24,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "kick", "amount": 0.12, "release": 0.34 },
+  "reverb": { "amount": 0.42, "decay": 4.2 },
+  "tracks": [
+    {
+      "name": "ghost-kick",
+      "voice": "kick",
+      "quant": 48,
+      "length": 16,
+      "steps": [46, 0, 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 34, 0, 0, 0]
+    },
+    {
+      "name": "sleep-sub",
+      "voice": "subbass",
+      "note": 33,
+      "quant": 192,
+      "length": 7,
+      "euclid": { "pulses": 3, "length": 7, "velocity": 58 }
+    },
+    {
+      "name": "air-13",
+      "voice": "hat_open",
+      "quant": 24,
+      "length": 13,
+      "offset": 8,
+      "euclid": { "pulses": 3, "length": 13, "velocity": 20 }
+    },
+    {
+      "name": "dust-11",
+      "voice": "hat",
+      "quant": 12,
+      "length": 11,
+      "swing": 2,
+      "euclid": { "pulses": 2, "length": 11, "velocity": 18 }
+    },
+    {
+      "name": "bell-cloud-7",
+      "voice": "bell",
+      "note": 76,
+      "quant": 48,
+      "length": 7,
+      "euclid": { "pulses": 2, "length": 7, "velocity": 40 }
+    },
+    {
+      "name": "bell-cloud-11",
+      "voice": "harmonic",
+      "note": 64,
+      "quant": 96,
+      "length": 11,
+      "euclid": { "pulses": 3, "length": 11, "velocity": 32 }
+    },
+    {
+      "name": "suspended-pad-root",
+      "voice": "pad",
+      "note": 45,
+      "quant": 192,
+      "length": 5,
+      "steps": [42, 0, 38, 0, 40]
+    },
+    {
+      "name": "suspended-pad-fifth",
+      "voice": "pad",
+      "note": 52,
+      "quant": 192,
+      "length": 7,
+      "euclid": { "pulses": 3, "length": 7, "velocity": 30 }
+    },
+    {
+      "name": "sleepwalk",
+      "type": "modulator",
+      "note": 0,
+      "quant": 48,
+      "length": 5,
+      "steps": [0, 1, 0, -1, 0]
+    }
+  ],
+  "modulations": [
+    { "type": "position", "source": 8, "target": 4 },
+    { "type": "position", "source": 8, "target": 5 }
+  ]
+}
