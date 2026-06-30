@@ -1,0 +1,30 @@
+{
+  "name": "neon",
+  "tempo": 124,
+  "ticks_per_beat": 24,
+  "bars": 16,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "house_kick_909", "amount": 0.45, "release": 0.18 },
+  "reverb": { "amount": 0.22, "decay": 1.8 },
+  "tracks": [
+    { "name": "kick", "voice": "house_kick_909", "quant": 24, "length": 4, "enter": 0, "exit": 16, "steps": [110, 110, 110, 110] },
+    { "name": "sub", "voice": "subbass", "note": 36, "quant": 12, "length": 8, "enter": 2, "exit": 16, "steps": [0, 92, 0, 92, 0, 92, 0, 100] },
+    { "name": "hats", "voice": "hat_closed_tight", "quant": 6, "length": 16, "swing": 2, "enter": 0, "exit": 16,
+      "steps": [50, 70, 50, 80, 50, 70, 50, 95, 50, 70, 50, 80, 50, 70, 50, 100] },
+    { "name": "offhat", "voice": "hat_offbeat_short", "quant": 12, "length": 8, "swing": 3, "enter": 4, "exit": 16, "steps": [0, 80, 0, 80, 0, 80, 0, 80] },
+    { "name": "clap", "voice": "house_clap_layered", "quant": 24, "length": 4, "enter": 4, "exit": 16, "steps": [0, 95, 0, 95] },
+    { "name": "conga", "voice": "perc_conga", "quant": 12, "length": 7, "enter": 6, "exit": 16, "euclid": { "pulses": 4, "length": 7, "velocity": 75 } },
+    { "name": "ride", "voice": "ride_metallic", "quant": 24, "length": 3, "enter": 8, "exit": 16, "steps": [70, 0, 0] },
+    { "name": "zap", "voice": "zap_blip", "quant": 12, "length": 11, "enter": 8, "exit": 16, "euclid": { "pulses": 3, "length": 11, "velocity": 65 } },
+
+    { "name": "voz-hook", "voice": "sample:voz16", "note": 60, "quant": 24, "length": 5, "enter": 8, "exit": 16,
+      "steps": [100, 0, 0, 0, 0], "fx": { "drive": 0.4, "bandpass": [350, 3200] } },
+    { "name": "voz-stab", "voice": "sample:voz6", "note": 64, "quant": 12, "length": 7, "enter": 10, "exit": 16,
+      "steps": [90, 0, 0, 85, 0, 0, 0], "fx": { "ring": 70, "drive": 0.5 } },
+
+    { "name": "drift", "type": "modulator", "note": 0, "quant": 12, "length": 5, "steps": [0, 1, 2, 1, 0] }
+  ],
+  "modulations": [
+    { "type": "position", "source": 10, "target": 9 }
+  ]
+}
