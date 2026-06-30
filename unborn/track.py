@@ -31,6 +31,8 @@ class Track:
     steps: list[int] = field(default_factory=list)
     mute: bool = False
     fx: dict | None = None
+    enter: int = 0
+    exit: int | None = None
 
     def step_at(self, index: int) -> int:
         if not self.steps:

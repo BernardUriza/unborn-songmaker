@@ -59,9 +59,16 @@ class Sequencer:
             if track.type == MODULATOR or track.mute:
                 continue
             total_ticks = bars * beats_per_bar * self.ticks_per_beat
+            bar_ticks = beats_per_bar * self.ticks_per_beat
+            enter_tick = track.enter * bar_ticks
+            exit_tick = track.exit * bar_ticks if track.exit is not None else total_ticks
             tick = track.offset
             global_step = 0
             while tick < total_ticks:
+                if not (enter_tick <= tick < exit_tick):
+                    tick += track.quant
+                    global_step += 1
+                    continue
                 if self._is_muted(ti, global_step):
                     tick += track.quant
                     global_step += 1

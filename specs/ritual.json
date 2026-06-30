@@ -1,0 +1,32 @@
+{
+  "name": "ritual",
+  "tempo": 130,
+  "ticks_per_beat": 24,
+  "bars": 16,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "kick", "amount": 0.55, "release": 0.18 },
+  "reverb": { "amount": 0.2, "decay": 1.6 },
+  "tracks": [
+    { "name": "kick", "voice": "kick", "quant": 24, "length": 4, "enter": 0, "exit": 16, "steps": [105, 105, 105, 105] },
+    { "name": "hats", "voice": "hat", "quant": 6, "length": 16, "swing": 2, "enter": 0, "exit": 16,
+      "steps": [40, 55, 40, 70, 40, 55, 40, 85, 40, 55, 40, 70, 40, 55, 40, 90] },
+    { "name": "open", "voice": "hat_open", "quant": 12, "length": 8, "swing": 3, "enter": 4, "exit": 16,
+      "steps": [0, 70, 0, 70, 0, 70, 0, 70] },
+    { "name": "sub", "voice": "subbass", "note": 33, "quant": 12, "length": 8, "enter": 2, "exit": 16,
+      "steps": [0, 95, 0, 95, 0, 95, 0, 105] },
+    { "name": "clap", "voice": "clap", "quant": 24, "length": 4, "enter": 4, "exit": 16, "steps": [0, 95, 0, 95] },
+
+    { "name": "voz3-hook", "voice": "sample:voz3", "note": 48, "quant": 12, "length": 7, "enter": 6, "exit": 16,
+      "steps": [110, 0, 95, 0, 0, 90, 0], "fx": { "crush": 4, "downsample": 4, "drive": 0.5 } },
+    { "name": "voz2-stab", "voice": "sample:voz2", "note": 60, "quant": 24, "length": 5, "enter": 8, "exit": 16,
+      "steps": [0, 100, 0, 0, 0], "fx": { "ring": 80, "drive": 0.6 } },
+
+    { "name": "stab", "voice": "harmonic", "note": 51, "quant": 12, "length": 11, "enter": 8, "exit": 16,
+      "euclid": { "pulses": 4, "length": 11, "velocity": 60 } },
+
+    { "name": "drift", "type": "modulator", "note": 0, "quant": 12, "length": 7, "steps": [0, 2, 0, 3, 0, 1, 0] }
+  ],
+  "modulations": [
+    { "type": "position", "source": 8, "target": 7 }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "nocturne",
+  "tempo": 120,
+  "ticks_per_beat": 24,
+  "bars": 24,
+  "beats_per_bar": 4,
+  "sidechain": { "source_voice": "kick", "amount": 0.5, "release": 0.22 },
+  "reverb": { "amount": 0.24, "decay": 1.8 },
+  "tracks": [
+    { "name": "pad-root", "voice": "pad", "note": 48, "quant": 48, "length": 2, "enter": 0, "exit": 16, "steps": [42, 42] },
+    { "name": "pad-root2", "voice": "pad", "note": 48, "quant": 48, "length": 2, "enter": 20, "exit": 24, "steps": [52, 52] },
+    { "name": "pad-5th", "voice": "pad", "note": 55, "quant": 48, "length": 5, "enter": 4, "exit": 16,
+      "euclid": { "pulses": 3, "length": 5, "velocity": 46 } },
+    { "name": "hats", "voice": "hat", "quant": 6, "length": 16, "swing": 3, "enter": 2, "exit": 22,
+      "steps": [0, 46, 0, 58, 0, 46, 0, 66, 0, 46, 0, 58, 0, 46, 0, 72] },
+    { "name": "kick", "voice": "kick", "quant": 24, "length": 4, "enter": 4, "exit": 16, "steps": [90, 90, 90, 90] },
+    { "name": "sub", "voice": "subbass", "note": 36, "quant": 12, "length": 8, "enter": 6, "exit": 16,
+      "steps": [86, 86, 86, 86, 86, 86, 86, 86] },
+    { "name": "clap", "voice": "clap", "quant": 24, "length": 4, "enter": 8, "exit": 16, "steps": [0, 60, 0, 60] },
+
+    { "name": "voz1-7", "voice": "sample:voz1", "note": 60, "quant": 12, "length": 7, "enter": 8, "exit": 24,
+      "steps": [110, 0, 0, 95, 0, 0, 0], "fx": { "drive": 0.5, "bandpass": [400, 3000] } },
+    { "name": "voz2-5", "voice": "sample:voz2", "note": 55, "quant": 24, "length": 5, "enter": 12, "exit": 24,
+      "steps": [0, 100, 0, 0, 90], "fx": { "ring": 55, "drive": 0.4 } },
+
+    { "name": "lead-7", "voice": "bell", "note": 63, "quant": 12, "length": 7, "enter": 16, "exit": 24,
+      "euclid": { "pulses": 3, "length": 7, "velocity": 56 } },
+
+    { "name": "kick2", "voice": "kick", "quant": 24, "length": 4, "enter": 20, "exit": 24, "steps": [94, 94, 94, 94] },
+    { "name": "sub2", "voice": "subbass", "note": 36, "quant": 12, "length": 8, "enter": 20, "exit": 24,
+      "steps": [88, 88, 88, 88, 88, 88, 88, 88] },
+
+    { "name": "drift", "type": "modulator", "note": 0, "quant": 12, "length": 5, "steps": [0, 1, 2, 1, 0] }
+  ],
+  "modulations": [
+    { "type": "position", "source": 12, "target": 9 }
+  ]
+}

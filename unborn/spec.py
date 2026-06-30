@@ -48,6 +48,8 @@ def track_from(spec: dict) -> Track:
         steps=steps,
         mute=spec.get("mute", False),
         fx=spec.get("fx"),
+        enter=spec.get("enter", 0),
+        exit=spec.get("exit"),
     )
 
 
