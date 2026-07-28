@@ -1,0 +1,46 @@
+{
+  "name": "safe_passage",
+  "tempo": 76,
+  "ticks_per_beat": 24,
+  "bars": 58,
+  "beats_per_bar": 4,
+  "reverb": { "amount": 0.32, "decay": 3.2 },
+  "tracks": [
+    { "name": "pad-root", "voice": "pad_warm", "note": 50, "quant": 96, "length": 3, "enter": 0, "exit": 57, "steps": [46, 0, 40] },
+    { "name": "pad-fifth", "voice": "pad_warm", "note": 57, "quant": 96, "length": 5, "enter": 4, "exit": 55, "steps": [0, 38, 0, 0, 34] },
+    { "name": "pad-ninth", "voice": "pad_warm", "note": 64, "quant": 144, "length": 4, "enter": 12, "exit": 52, "steps": [0, 38, 0, 0] },
+    { "name": "pad-glass-high", "voice": "pad_glass", "note": 74, "quant": 192, "length": 3, "enter": 34, "exit": 50, "steps": [32, 0, 0] },
+
+    { "name": "sub-pedal", "voice": "subbass", "note": 38, "quant": 48, "length": 6, "enter": 6, "exit": 54, "steps": [50, 0, 0, 44, 0, 0] },
+
+    { "name": "celesta-melody", "voice": "celesta", "note": 62, "quant": 24, "length": 16, "enter": 10, "exit": 30,
+      "steps": [54, 0, 0, 46, 0, 50, 0, 0, 42, 0, 0, 48, 0, 0, 0, 0] },
+    { "name": "celesta-melody-hi", "voice": "celesta", "note": 74, "quant": 24, "length": 16, "enter": 36, "exit": 52,
+      "steps": [44, 0, 0, 0, 40, 0, 0, 46, 0, 0, 38, 0, 0, 0, 0, 0] },
+
+    { "name": "kalimba-valley", "voice": "kalimba", "note": 69, "quant": 24, "length": 11, "enter": 26, "exit": 40,
+      "euclid": { "pulses": 4, "length": 11, "velocity": 40 } },
+
+    { "name": "harp-accent", "voice": "harp_pluck", "note": 81, "quant": 48, "length": 7, "enter": 18, "exit": 54,
+      "euclid": { "pulses": 2, "length": 7, "velocity": 34 } },
+
+    { "name": "vibraphone-anchor", "voice": "vibraphone", "note": 65, "quant": 96, "length": 7, "enter": 14, "exit": 56,
+      "steps": [0, 0, 40, 0, 0, 0, 0] },
+
+    { "name": "shaker-breath", "voice": "perc_shaker", "quant": 12, "length": 19, "swing": 1, "enter": 8, "exit": 52,
+      "euclid": { "pulses": 7, "length": 19, "velocity": 22 } },
+
+    { "name": "rain-bed", "voice": "rain_soft", "note": 36, "quant": 96, "length": 4, "enter": 0, "exit": 58, "steps": [30, 0, 26, 0] },
+    { "name": "forest-open", "voice": "forest_air", "note": 40, "quant": 192, "length": 3, "enter": 0, "exit": 20, "steps": [28, 0, 0] },
+    { "name": "forest-close", "voice": "forest_air", "note": 40, "quant": 192, "length": 3, "enter": 44, "exit": 58, "steps": [26, 0, 0] },
+
+    { "name": "melody", "type": "modulator", "note": 0, "quant": 24, "length": 12, "steps": [0, 3, 5, 0, 7, 3, 0, 5, 9, 7, 0, 3] },
+    { "name": "chord", "type": "modulator", "note": 0, "quant": 96, "length": 8, "steps": [0, 0, -7, -7, -9, -9, -5, -5] }
+  ],
+  "modulations": [
+    { "type": "note", "source": 14, "target": 5 },
+    { "type": "note", "source": 14, "target": 6 },
+    { "type": "note", "source": 15, "target": 0 },
+    { "type": "note", "source": 15, "target": 1 }
+  ]
+}
