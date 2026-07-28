@@ -45,6 +45,21 @@ def cmd_sculpture(path: str) -> None:
     emit(name, mix(events, sidechain=spec.get("sidechain"), rev=spec.get("reverb")))
 
 
+def cmd_live(path: str, minutes: float | None, sink: str, dest: str | None) -> None:
+    from unborn.live import LiveRenderer, pipe, play
+    seq, spec = load(path)
+    r = LiveRenderer(seq, spec)
+    print(f"  {spec.get('name')}: {len(seq.tracks)} tracks, gain {r.calibrate():.3f}, "
+          f"cycle {spec.get('bars')} bars — ctrl-c para parar")
+    if sink == "speaker":
+        play(r, minutes=minutes)
+    else:
+        os.makedirs(OUT, exist_ok=True)
+        out = dest or os.path.join(OUT, f"{spec.get('name')}_live.wav")
+        pipe(r, ["-y", out], minutes=minutes)
+        print(f"  -> {out}")
+
+
 def main() -> None:
     p = argparse.ArgumentParser(prog="unborn-songmaker")
     sub = p.add_subparsers(dest="mode", required=True)
@@ -52,11 +67,18 @@ def main() -> None:
     c.add_argument("name", help="cue name, or 'all'")
     s = sub.add_parser("sculpture", help="render a polymeter sculpture spec")
     s.add_argument("path", help="path to a sculpture .json spec")
+    v = sub.add_parser("live", help="stream a sculpture forever (mode 2)")
+    v.add_argument("path", help="path to a sculpture .json spec")
+    v.add_argument("--minutes", type=float, default=None, help="stop after N minutes")
+    v.add_argument("--sink", choices=["speaker", "ffmpeg"], default="speaker")
+    v.add_argument("--dest", default=None, help="ffmpeg sink target (file or url)")
     args = p.parse_args()
     if args.mode == "cue":
         cmd_cue(args.name)
-    else:
+    elif args.mode == "sculpture":
         cmd_sculpture(args.path)
+    else:
+        cmd_live(args.path, args.minutes, args.sink, args.dest)
 
 
 if __name__ == "__main__":

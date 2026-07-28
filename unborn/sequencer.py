@@ -52,43 +52,49 @@ class Sequencer:
                     return True
         return False
 
-    def run(self, bars: int = 4, beats_per_bar: int = 4) -> list[NoteEvent]:
+    def events_in(self, start_tick: int, end_tick: int, beats_per_bar: int = 4,
+                  cycle_ticks: int | None = None) -> list[NoteEvent]:
+        """Every note whose step falls in [start_tick, end_tick). The window is the
+        only thing bounded -- `global_step` keeps counting from the absolute origin,
+        so polymeter phase and modulations stay coherent across any number of
+        windows. `cycle_ticks` folds each track's enter/exit window modulo a cycle:
+        the arrangement recurs while the step phase keeps drifting, which is how a
+        Korda sculpture runs forever without ever repeating itself."""
         spt = self._seconds_per_tick()
+        bar_ticks = beats_per_bar * self.ticks_per_beat
         events: list[NoteEvent] = []
         for ti, track in enumerate(self.tracks):
             if track.type == MODULATOR or track.mute:
                 continue
-            total_ticks = bars * beats_per_bar * self.ticks_per_beat
-            bar_ticks = beats_per_bar * self.ticks_per_beat
             enter_tick = track.enter * bar_ticks
-            exit_tick = track.exit * bar_ticks if track.exit is not None else total_ticks
-            tick = track.offset
-            global_step = 0
-            while tick < total_ticks:
-                if not (enter_tick <= tick < exit_tick):
-                    tick += track.quant
-                    global_step += 1
-                    continue
-                if self._is_muted(ti, global_step):
-                    tick += track.quant
-                    global_step += 1
-                    continue
-                read = global_step + self._position_shift(ti, global_step)
-                vel = track.step_at(read)
-                if vel > 0:
-                    note = track.note + self._mod_value(MOD_NOTE, ti, global_step)
-                    velocity = min(127, max(1, vel + track.velocity
-                                            + self._mod_value(MOD_VELOCITY, ti, global_step)))
-                    swing = track.swing if (global_step % 2 == 1) else 0
-                    events.append(NoteEvent(
-                        time=(tick + swing) * spt,
-                        note=note,
-                        velocity=velocity,
-                        duration=track.quant * spt * 0.9,
-                        voice=track.voice,
-                        fx=track.fx,
-                    ))
+            exit_tick = track.exit * bar_ticks if track.exit is not None else None
+            first = max(0, -((track.offset - start_tick) // track.quant))
+            global_step = first
+            tick = track.offset + first * track.quant
+            while tick < end_tick:
+                pos = tick % cycle_ticks if cycle_ticks else tick
+                live = pos >= enter_tick and (exit_tick is None or pos < exit_tick)
+                if live and not self._is_muted(ti, global_step):
+                    read = global_step + self._position_shift(ti, global_step)
+                    vel = track.step_at(read)
+                    if vel > 0:
+                        note = track.note + self._mod_value(MOD_NOTE, ti, global_step)
+                        velocity = min(127, max(1, vel + track.velocity
+                                                + self._mod_value(MOD_VELOCITY, ti, global_step)))
+                        swing = track.swing if (global_step % 2 == 1) else 0
+                        events.append(NoteEvent(
+                            time=(tick + swing) * spt,
+                            note=note,
+                            velocity=velocity,
+                            duration=track.quant * spt * 0.9,
+                            voice=track.voice,
+                            fx=track.fx,
+                        ))
                 tick += track.quant
                 global_step += 1
         events.sort(key=lambda e: e.time)
         return events
+
+    def run(self, bars: int = 4, beats_per_bar: int = 4) -> list[NoteEvent]:
+        total_ticks = bars * beats_per_bar * self.ticks_per_beat
+        return self.events_in(0, total_ticks, beats_per_bar)
