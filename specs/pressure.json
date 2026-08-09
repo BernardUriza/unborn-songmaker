@@ -2,106 +2,56 @@
   "name": "pressure",
   "tempo": 126,
   "ticks_per_beat": 24,
-  "bars": 32,
+  "bars": 28,
   "beats_per_bar": 4,
-  "sidechain": { "source_voice": "kick", "amount": 0.48, "release": 0.14 },
-  "reverb": { "amount": 0.22, "decay": 2.2 },
+  "sidechain": { "source_voice": "house_kick_909", "amount": 0.58, "release": 0.17 },
+  "reverb": { "amount": 0.24, "decay": 1.7 },
   "tracks": [
-    {
-      "name": "fixed-kick",
-      "voice": "kick",
-      "quant": 24,
-      "length": 4,
-      "steps": [112, 112, 112, 112]
-    },
-    {
-      "name": "sub-7",
-      "voice": "subbass",
-      "note": 35,
-      "quant": 24,
-      "length": 7,
-      "euclid": { "pulses": 4, "length": 7, "velocity": 86 }
-    },
-    {
-      "name": "bass-11",
-      "voice": "bass",
-      "note": 47,
-      "quant": 12,
-      "length": 11,
-      "euclid": { "pulses": 5, "length": 11, "velocity": 82 }
-    },
-    {
-      "name": "hat-5-16",
-      "voice": "hat",
-      "quant": 6,
-      "length": 16,
-      "swing": 2,
-      "euclid": { "pulses": 5, "length": 16, "velocity": 52 }
-    },
-    {
-      "name": "hat-7-16-offset",
-      "voice": "hat",
-      "quant": 6,
-      "length": 16,
-      "swing": 2,
-      "offset": 2,
-      "euclid": { "pulses": 7, "length": 16, "velocity": 44 }
-    },
-    {
-      "name": "open-9-16",
-      "voice": "hat_open",
-      "quant": 6,
-      "length": 16,
-      "swing": 2,
-      "offset": 5,
-      "euclid": { "pulses": 9, "length": 16, "velocity": 36 }
-    },
-    {
-      "name": "metal-7",
-      "voice": "bell",
-      "note": 69,
-      "quant": 12,
-      "length": 7,
-      "euclid": { "pulses": 3, "length": 7, "velocity": 46 }
-    },
-    {
-      "name": "metal-13",
-      "voice": "harmonic",
-      "note": 57,
-      "quant": 24,
-      "length": 13,
-      "euclid": { "pulses": 5, "length": 13, "velocity": 40 }
-    },
-    {
-      "name": "beating-drone",
-      "voice": "pad",
-      "note": 43,
-      "quant": 96,
-      "length": 11,
-      "euclid": { "pulses": 6, "length": 11, "velocity": 34 }
-    },
-    {
-      "name": "slip",
-      "type": "modulator",
-      "note": 0,
-      "quant": 12,
-      "length": 13,
-      "steps": [0, 1, 0, 2, 1, 0, -1, 0, 1, 0, -2, 0, 1]
-    },
-    {
-      "name": "density",
-      "type": "modulator",
-      "note": 0,
-      "quant": 6,
-      "length": 7,
-      "steps": [0, 4, 0, -3, 0, 3, -2]
-    }
+    { "name": "pad-pressure-root", "voice": "pad", "note": 43, "quant": 48, "length": 5, "enter": 0, "exit": 24,
+      "euclid": { "pulses": 2, "length": 5, "velocity": 34 } },
+    { "name": "pad-pressure-fifth", "voice": "pad", "note": 50, "quant": 48, "length": 7, "enter": 4, "exit": 28,
+      "steps": [0, 32, 0, 0, 38, 0, 0] },
+
+    { "name": "kick-909-lock", "voice": "house_kick_909", "quant": 24, "length": 4, "enter": 0, "exit": 28,
+      "steps": [112, 112, 112, 112] },
+    { "name": "kick-punchy-offset-threat", "voice": "house_kick_punchy", "quant": 12, "length": 11, "enter": 12, "exit": 26,
+      "steps": [0, 0, 78, 0, 0, 0, 86, 0, 0, 72, 0] },
+    { "name": "sub-11-rising", "voice": "subbass", "note": 31, "quant": 12, "length": 11, "enter": 4, "exit": 28,
+      "steps": [92, 0, 74, 0, 0, 86, 0, 78, 0, 0, 98] },
+    { "name": "clap-layered-fracture", "voice": "house_clap_layered", "quant": 24, "length": 4, "enter": 7, "exit": 28,
+      "steps": [0, 92, 0, 98] },
+
+    { "name": "hat-tight-13-pressure", "voice": "hat_closed_tight", "quant": 6, "length": 13, "swing": 2, "enter": 2, "exit": 28,
+      "euclid": { "pulses": 9, "length": 13, "velocity": 52 } },
+    { "name": "offhat-alarm", "voice": "hat_offbeat_short", "quant": 12, "length": 8, "swing": 3, "enter": 6, "exit": 28,
+      "steps": [0, 76, 0, 80, 0, 74, 0, 86] },
+    { "name": "ride-metallic-rise", "voice": "ride_metallic", "quant": 24, "length": 3, "enter": 16, "exit": 28,
+      "steps": [66, 0, 0] },
+
+    { "name": "conga-7-slip", "voice": "perc_conga", "quant": 12, "length": 7, "enter": 8, "exit": 28,
+      "euclid": { "pulses": 4, "length": 7, "velocity": 72 } },
+    { "name": "bongo-11-slip", "voice": "perc_bongo", "quant": 12, "length": 11, "enter": 10, "exit": 28,
+      "euclid": { "pulses": 5, "length": 11, "velocity": 62 } },
+    { "name": "tom-mid-13-pressure", "voice": "perc_tom_mid", "quant": 24, "length": 13, "enter": 18, "exit": 28,
+      "steps": [0, 66, 0, 0, 74, 0, 0, 0, 68, 0, 76, 0, 0] },
+    { "name": "crash-turns", "voice": "crash_short", "quant": 96, "length": 7, "enter": 8, "exit": 28,
+      "steps": [82, 0, 0, 0, 70, 0, 0] },
+    { "name": "zap-11-static", "voice": "zap_blip", "quant": 12, "length": 11, "enter": 14, "exit": 28,
+      "euclid": { "pulses": 4, "length": 11, "velocity": 58 } },
+
+    { "name": "voz16-ring-menace", "voice": "sample:voz16", "note": 47, "quant": 24, "length": 7, "enter": 8, "exit": 28,
+      "steps": [0, 58, 0, 0, 48, 0, 68], "fx": { "ring": 74, "drive": 0.62, "bandpass": [360, 2600] } },
+    { "name": "voz6-metal-breath", "voice": "sample:voz6", "note": 52, "quant": 36, "length": 13, "enter": 14, "exit": 27,
+      "steps": [52, 0, 0, 0, 62, 0, 0, 46, 0, 0, 0, 58, 0], "fx": { "ring": 91, "drive": 0.5, "bandpass": [520, 3600] } },
+    { "name": "bell-17-warning", "voice": "bell", "note": 62, "quant": 12, "length": 17, "enter": 18, "exit": 28,
+      "euclid": { "pulses": 5, "length": 17, "velocity": 46 } },
+    { "name": "harmonic-13-siren", "voice": "harmonic", "note": 67, "quant": 12, "length": 13, "enter": 21, "exit": 28,
+      "euclid": { "pulses": 4, "length": 13, "velocity": 38 } },
+
+    { "name": "pressure-drift", "type": "modulator", "note": 0, "quant": 6, "length": 5,
+      "steps": [0, 2, 1, 3, 0] }
   ],
   "modulations": [
-    { "type": "position", "source": 9, "target": 2 },
-    { "type": "position", "source": 9, "target": 6 },
-    { "type": "position", "source": 9, "target": 7 },
-    { "type": "velocity", "source": 10, "target": 3 },
-    { "type": "velocity", "source": 10, "target": 4 }
+    { "type": "position", "source": 18, "target": 14 }
   ]
 }

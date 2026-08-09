@@ -2,77 +2,44 @@
   "name": "explore",
   "tempo": 120,
   "ticks_per_beat": 24,
-  "bars": 32,
+  "bars": 24,
   "beats_per_bar": 4,
-  "sidechain": { "source_voice": "kick", "amount": 0.34, "release": 0.18 },
-  "reverb": { "amount": 0.16, "decay": 2.6 },
+  "sidechain": { "source_voice": "house_kick_deep", "amount": 0.36, "release": 0.24 },
+  "reverb": { "amount": 0.32, "decay": 2.6 },
   "tracks": [
-    {
-      "name": "dry-kick",
-      "voice": "kick",
-      "quant": 24,
-      "length": 4,
-      "steps": [104, 104, 104, 104]
-    },
-    {
-      "name": "sub-constant",
-      "voice": "subbass",
-      "note": 36,
-      "quant": 96,
-      "length": 4,
-      "steps": [86, 82, 86, 80]
-    },
-    {
-      "name": "hat-5",
-      "voice": "hat",
-      "quant": 6,
-      "length": 16,
-      "swing": 2,
-      "euclid": { "pulses": 5, "length": 16, "velocity": 48 }
-    },
-    {
-      "name": "hat-7",
-      "voice": "hat",
-      "quant": 6,
-      "length": 16,
-      "swing": 2,
-      "offset": 3,
-      "euclid": { "pulses": 7, "length": 16, "velocity": 34 }
-    },
-    {
-      "name": "open-air",
-      "voice": "hat_open",
-      "quant": 12,
-      "length": 16,
-      "swing": 2,
-      "steps": [0, 0, 38, 0, 0, 0, 30, 0, 0, 34, 0, 0, 0, 0, 42, 0]
-    },
-    {
-      "name": "long-drift-root",
-      "voice": "pad",
-      "note": 48,
-      "quant": 192,
-      "length": 5,
-      "steps": [38, 0, 34, 0, 36]
-    },
-    {
-      "name": "distant-bell-7",
-      "voice": "bell",
-      "note": 72,
-      "quant": 24,
-      "length": 7,
-      "euclid": { "pulses": 2, "length": 7, "velocity": 42 }
-    },
-    {
-      "name": "drift",
-      "type": "modulator",
-      "note": 0,
-      "quant": 24,
-      "length": 11,
-      "steps": [0, 0, 1, 0, 2, 1, 0, -1, 0, 1, 0]
-    }
+    { "name": "pad-root-observer", "voice": "pad", "note": 48, "quant": 96, "length": 3, "enter": 0, "exit": 22,
+      "steps": [38, 0, 42] },
+    { "name": "pad-fifth-haze", "voice": "pad", "note": 55, "quant": 96, "length": 5, "enter": 4, "exit": 24,
+      "euclid": { "pulses": 2, "length": 5, "velocity": 36 } },
+    { "name": "pad-octave-return", "voice": "pad", "note": 60, "quant": 96, "length": 7, "enter": 16, "exit": 24,
+      "steps": [0, 30, 0, 0, 34, 0, 0] },
+
+    { "name": "kick-deep-foundation", "voice": "house_kick_deep", "quant": 24, "length": 8, "enter": 6, "exit": 22,
+      "steps": [96, 0, 82, 0, 92, 0, 0, 72] },
+    { "name": "subbass-survey-11", "voice": "subbass", "note": 36, "quant": 12, "length": 11, "enter": 7, "exit": 23,
+      "steps": [0, 82, 0, 70, 0, 0, 76, 0, 68, 0, 88] },
+
+    { "name": "hat-tight-13", "voice": "hat_closed_tight", "quant": 6, "length": 13, "swing": 2, "enter": 2, "exit": 22,
+      "euclid": { "pulses": 8, "length": 13, "velocity": 46 } },
+    { "name": "hat-offbeat-air", "voice": "hat_offbeat_short", "quant": 12, "length": 8, "swing": 3, "enter": 10, "exit": 20,
+      "steps": [0, 54, 0, 50, 0, 58, 0, 52] },
+    { "name": "shaker-distance-17", "voice": "perc_shaker", "quant": 6, "length": 17, "swing": 1, "enter": 8, "exit": 24,
+      "euclid": { "pulses": 7, "length": 17, "velocity": 34 } },
+    { "name": "woodblock-space-7", "voice": "perc_woodblock", "quant": 24, "length": 7, "enter": 12, "exit": 21,
+      "steps": [0, 38, 0, 0, 44, 0, 0] },
+
+    { "name": "voz16-observer", "voice": "sample:voz16", "note": 53, "quant": 72, "length": 11, "enter": 9, "exit": 24,
+      "steps": [34, 0, 0, 0, 28, 0, 0, 32, 0, 0, 0], "fx": { "drive": 0.18, "bandpass": [320, 1900] } },
+    { "name": "voz6-distant-answer", "voice": "sample:voz6", "note": 48, "quant": 96, "length": 7, "enter": 15, "exit": 24,
+      "steps": [0, 26, 0, 0, 30, 0, 0], "fx": { "ring": 37, "drive": 0.14, "bandpass": [260, 1500] } },
+
+    { "name": "bell-map-17", "voice": "bell", "note": 67, "quant": 12, "length": 17, "enter": 17, "exit": 24,
+      "euclid": { "pulses": 4, "length": 17, "velocity": 42 } },
+
+    { "name": "phase-drift", "type": "modulator", "note": 0, "quant": 12, "length": 5,
+      "steps": [0, 1, 2, 1, 0] }
   ],
   "modulations": [
-    { "type": "position", "source": 7, "target": 6 }
+    { "type": "position", "source": 12, "target": 9 }
   ]
 }

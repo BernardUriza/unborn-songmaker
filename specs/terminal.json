@@ -4,75 +4,43 @@
   "ticks_per_beat": 24,
   "bars": 24,
   "beats_per_bar": 4,
-  "sidechain": { "source_voice": "kick", "amount": 0.18, "release": 0.26 },
-  "reverb": { "amount": 0.34, "decay": 3.4 },
+  "sidechain": { "source_voice": "house_kick_deep", "amount": 0.18, "release": 0.34 },
+  "reverb": { "amount": 0.48, "decay": 3.8 },
   "tracks": [
-    {
-      "name": "thin-kick",
-      "voice": "kick",
-      "quant": 24,
-      "length": 16,
-      "steps": [72, 0, 0, 0, 0, 0, 64, 0, 0, 0, 0, 58, 0, 0, 0, 0]
-    },
-    {
-      "name": "low-pulse-11",
-      "voice": "subbass",
-      "note": 34,
-      "quant": 48,
-      "length": 11,
-      "euclid": { "pulses": 3, "length": 11, "velocity": 76 }
-    },
-    {
-      "name": "noise-clicks",
-      "voice": "hat",
-      "quant": 12,
-      "length": 16,
-      "swing": 2,
-      "steps": [0, 22, 0, 0, 26, 0, 0, 18, 0, 0, 24, 0, 0, 0, 20, 0]
-    },
-    {
-      "name": "filtered-air",
-      "voice": "hat_open",
-      "quant": 24,
-      "length": 13,
-      "offset": 6,
-      "euclid": { "pulses": 3, "length": 13, "velocity": 24 }
-    },
-    {
-      "name": "metal-13",
-      "voice": "bell",
-      "note": 67,
-      "quant": 24,
-      "length": 13,
-      "euclid": { "pulses": 4, "length": 13, "velocity": 44 }
-    },
-    {
-      "name": "distant-metal-7",
-      "voice": "harmonic",
-      "note": 74,
-      "quant": 48,
-      "length": 7,
-      "euclid": { "pulses": 2, "length": 7, "velocity": 34 }
-    },
-    {
-      "name": "approach-pad",
-      "voice": "pad",
-      "note": 46,
-      "quant": 192,
-      "length": 5,
-      "steps": [34, 0, 36, 0, 32]
-    },
-    {
-      "name": "confession-drift",
-      "type": "modulator",
-      "note": 0,
-      "quant": 24,
-      "length": 7,
-      "steps": [0, 1, 0, -1, 0, 2, 0]
-    }
+    { "name": "pad-confession-root", "voice": "pad", "note": 45, "quant": 96, "length": 2, "enter": 0, "exit": 24,
+      "steps": [42, 38] },
+    { "name": "pad-confession-fifth", "voice": "pad", "note": 52, "quant": 96, "length": 5, "enter": 3, "exit": 22,
+      "euclid": { "pulses": 2, "length": 5, "velocity": 34 } },
+    { "name": "harmonic-near-field", "voice": "harmonic", "note": 57, "quant": 48, "length": 11, "enter": 6, "exit": 20,
+      "steps": [0, 30, 0, 0, 36, 0, 0, 0, 28, 0, 0] },
+
+    { "name": "voz16-close-filtered", "voice": "sample:voz16", "note": 52, "quant": 72, "length": 7, "enter": 2, "exit": 17,
+      "steps": [42, 0, 0, 32, 0, 0, 0], "fx": { "drive": 0.34, "bandpass": [430, 2500] } },
+    { "name": "voz6-answer", "voice": "sample:voz6", "note": 48, "quant": 96, "length": 5, "enter": 8, "exit": 23,
+      "steps": [0, 34, 0, 0, 40], "fx": { "drive": 0.24, "bandpass": [300, 1650], "ring": 41 } },
+    { "name": "voz11-last-breath", "voice": "sample:voz11", "note": 55, "quant": 48, "length": 13, "enter": 17, "exit": 24,
+      "steps": [0, 0, 28, 0, 0, 0, 36, 0, 0, 0, 0, 32, 0], "fx": { "drive": 0.18, "bandpass": [520, 3000] } },
+
+    { "name": "bell-distant-13", "voice": "bell", "note": 64, "quant": 24, "length": 13, "enter": 5, "exit": 24,
+      "euclid": { "pulses": 3, "length": 13, "velocity": 36 } },
+    { "name": "bell-low-room-7", "voice": "bell", "note": 59, "quant": 48, "length": 7, "enter": 11, "exit": 24,
+      "steps": [0, 30, 0, 0, 0, 36, 0] },
+
+    { "name": "rim-near-ticks", "voice": "rim_click", "quant": 24, "length": 17, "enter": 9, "exit": 21,
+      "euclid": { "pulses": 4, "length": 17, "velocity": 34 } },
+    { "name": "woodblock-room-11", "voice": "perc_woodblock", "quant": 48, "length": 11, "enter": 12, "exit": 20,
+      "steps": [0, 30, 0, 0, 0, 36, 0, 0, 28, 0, 0] },
+    { "name": "brief-kick-approach", "voice": "house_kick_deep", "quant": 24, "length": 8, "enter": 14, "exit": 18,
+      "steps": [82, 0, 0, 0, 72, 0, 0, 0] },
+    { "name": "sub-brief-weight", "voice": "subbass", "note": 33, "quant": 48, "length": 5, "enter": 14, "exit": 19,
+      "steps": [58, 0, 46, 0, 0] },
+    { "name": "shaker-room-air-17", "voice": "perc_shaker", "quant": 12, "length": 17, "swing": 2, "enter": 13, "exit": 22,
+      "euclid": { "pulses": 5, "length": 17, "velocity": 24 } },
+
+    { "name": "terminal-drift", "type": "modulator", "note": 0, "quant": 24, "length": 5,
+      "steps": [0, 1, 0, 2, 0] }
   ],
   "modulations": [
-    { "type": "position", "source": 7, "target": 4 },
-    { "type": "position", "source": 7, "target": 5 }
+    { "type": "position", "source": 13, "target": 3 }
   ]
 }

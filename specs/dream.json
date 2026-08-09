@@ -1,86 +1,46 @@
 {
   "name": "dream",
-  "tempo": 84,
+  "tempo": 86,
   "ticks_per_beat": 24,
-  "bars": 24,
+  "bars": 28,
   "beats_per_bar": 4,
-  "sidechain": { "source_voice": "kick", "amount": 0.12, "release": 0.34 },
-  "reverb": { "amount": 0.42, "decay": 4.2 },
+  "sidechain": { "source_voice": "house_kick_deep", "amount": 0.12, "release": 0.5 },
+  "reverb": { "amount": 0.62, "decay": 5.4 },
   "tracks": [
-    {
-      "name": "ghost-kick",
-      "voice": "kick",
-      "quant": 48,
-      "length": 16,
-      "steps": [46, 0, 0, 0, 0, 0, 0, 38, 0, 0, 0, 0, 34, 0, 0, 0]
-    },
-    {
-      "name": "sleep-sub",
-      "voice": "subbass",
-      "note": 33,
-      "quant": 192,
-      "length": 7,
-      "euclid": { "pulses": 3, "length": 7, "velocity": 58 }
-    },
-    {
-      "name": "air-13",
-      "voice": "hat_open",
-      "quant": 24,
-      "length": 13,
-      "offset": 8,
-      "euclid": { "pulses": 3, "length": 13, "velocity": 20 }
-    },
-    {
-      "name": "dust-11",
-      "voice": "hat",
-      "quant": 12,
-      "length": 11,
-      "swing": 2,
-      "euclid": { "pulses": 2, "length": 11, "velocity": 18 }
-    },
-    {
-      "name": "bell-cloud-7",
-      "voice": "bell",
-      "note": 76,
-      "quant": 48,
-      "length": 7,
-      "euclid": { "pulses": 2, "length": 7, "velocity": 40 }
-    },
-    {
-      "name": "bell-cloud-11",
-      "voice": "harmonic",
-      "note": 64,
-      "quant": 96,
-      "length": 11,
-      "euclid": { "pulses": 3, "length": 11, "velocity": 32 }
-    },
-    {
-      "name": "suspended-pad-root",
-      "voice": "pad",
-      "note": 45,
-      "quant": 192,
-      "length": 5,
-      "steps": [42, 0, 38, 0, 40]
-    },
-    {
-      "name": "suspended-pad-fifth",
-      "voice": "pad",
-      "note": 52,
-      "quant": 192,
-      "length": 7,
-      "euclid": { "pulses": 3, "length": 7, "velocity": 30 }
-    },
-    {
-      "name": "sleepwalk",
-      "type": "modulator",
-      "note": 0,
-      "quant": 48,
-      "length": 5,
-      "steps": [0, 1, 0, -1, 0]
-    }
+    { "name": "pad-suspended-root", "voice": "pad", "note": 41, "quant": 144, "length": 3, "enter": 0, "exit": 28,
+      "steps": [44, 0, 38] },
+    { "name": "pad-suspended-fifth", "voice": "pad", "note": 48, "quant": 144, "length": 5, "enter": 4, "exit": 26,
+      "euclid": { "pulses": 2, "length": 5, "velocity": 34 } },
+    { "name": "pad-high-fog", "voice": "pad", "note": 60, "quant": 144, "length": 7, "enter": 10, "exit": 28,
+      "steps": [0, 28, 0, 0, 34, 0, 0] },
+    { "name": "sub-dream-tide", "voice": "subbass", "note": 29, "quant": 96, "length": 11, "enter": 8, "exit": 23,
+      "steps": [34, 0, 0, 0, 28, 0, 0, 32, 0, 0, 0] },
+
+    { "name": "bell-ghost-13", "voice": "bell", "note": 65, "quant": 24, "length": 13, "enter": 3, "exit": 28,
+      "euclid": { "pulses": 3, "length": 13, "velocity": 32 } },
+    { "name": "bell-ghost-17", "voice": "bell", "note": 70, "quant": 36, "length": 17, "enter": 12, "exit": 28,
+      "euclid": { "pulses": 4, "length": 17, "velocity": 28 } },
+    { "name": "harmonic-sleep-wake", "voice": "harmonic", "note": 53, "quant": 48, "length": 7, "enter": 16, "exit": 27,
+      "steps": [0, 24, 0, 0, 30, 0, 0] },
+
+    { "name": "shaker-whispers-17", "voice": "perc_shaker", "quant": 12, "length": 17, "swing": 2, "enter": 5, "exit": 25,
+      "euclid": { "pulses": 5, "length": 17, "velocity": 20 } },
+    { "name": "rim-distant-11", "voice": "rim_click", "quant": 72, "length": 11, "enter": 14, "exit": 24,
+      "steps": [0, 22, 0, 0, 0, 28, 0, 0, 20, 0, 0] },
+    { "name": "kick-memory", "voice": "house_kick_deep", "quant": 96, "length": 5, "enter": 18, "exit": 20,
+      "steps": [44, 0, 0, 0, 34] },
+
+    { "name": "voz16-ghost-grain", "voice": "sample:voz16", "note": 57, "quant": 96, "length": 7, "enter": 6, "exit": 25,
+      "steps": [0, 28, 0, 0, 22, 0, 0], "fx": { "ring": 24, "drive": 0.12, "bandpass": [260, 1600] } },
+    { "name": "voz6-under-surface", "voice": "sample:voz6", "note": 45, "quant": 72, "length": 11, "enter": 14, "exit": 28,
+      "steps": [22, 0, 0, 0, 26, 0, 0, 0, 20, 0, 0], "fx": { "ring": 31, "drive": 0.16, "bandpass": [180, 1200] } },
+    { "name": "voz12-last-image", "voice": "sample:voz12", "note": 52, "quant": 144, "length": 5, "enter": 20, "exit": 28,
+      "steps": [0, 24, 0, 0, 28], "fx": { "drive": 0.14, "bandpass": [420, 2400] } },
+
+    { "name": "dream-drift", "type": "modulator", "note": 0, "quant": 24, "length": 5,
+      "steps": [0, 1, 0, 2, 1] }
   ],
   "modulations": [
-    { "type": "position", "source": 8, "target": 4 },
-    { "type": "position", "source": 8, "target": 5 }
+    { "type": "position", "source": 13, "target": 10 }
   ]
 }
