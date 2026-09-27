@@ -29,28 +29,28 @@ class Sequencer:
     def _seconds_per_tick(self) -> float:
         return 60.0 / (self.tempo * self.ticks_per_beat)
 
-    def _position_shift(self, target_index: int, global_step: int) -> int:
-        shift = 0
-        for mod in self.modulations:
-            if mod.type == MOD_POSITION and mod.target == target_index:
-                src = self.tracks[mod.source]
-                shift += src.step_at(global_step) - src.note
-        return shift
-
-    def _mod_value(self, mod_type: str, target_index: int, global_step: int) -> int:
-        value = 0
+    def _mods(self, mod_type: str, target_index: int):
         for mod in self.modulations:
             if mod.type == mod_type and mod.target == target_index:
                 src = self.tracks[mod.source]
-                value += src.step_at(global_step)
+                if not src.mute:  # Korda: a muted modulator is simply ignored
+                    yield src
+
+    def _mod_value(self, mod_type: str, target_index: int, tick: int) -> int:
+        """Sum of the modulators' step values at absolute `tick`, each read on
+        its own clock (CSequencer::SumModulations). For MOD_POSITION the source's
+        `note` is the resting centre, so a modulator at note 0 shifts by its raw
+        step value."""
+        value = 0
+        for src in self._mods(mod_type, target_index):
+            value += src.step_at(src.step_index(tick))
+            if mod_type == MOD_POSITION:
+                value -= src.note
         return value
 
-    def _is_muted(self, target_index: int, global_step: int) -> bool:
-        for mod in self.modulations:
-            if mod.type == MOD_MUTE and mod.target == target_index:
-                if self.tracks[mod.source].step_at(global_step) > 0:
-                    return True
-        return False
+    def _is_muted(self, target_index: int, tick: int) -> bool:
+        return any(src.step_at(src.step_index(tick)) > 0
+                   for src in self._mods(MOD_MUTE, target_index))
 
     def events_in(self, start_tick: int, end_tick: int, beats_per_bar: int = 4,
                   cycle_ticks: int | None = None) -> list[NoteEvent]:
@@ -74,13 +74,13 @@ class Sequencer:
             while tick < end_tick:
                 pos = tick % cycle_ticks if cycle_ticks else tick
                 live = pos >= enter_tick and (exit_tick is None or pos < exit_tick)
-                if live and not self._is_muted(ti, global_step):
-                    read = global_step + self._position_shift(ti, global_step)
+                if live and not self._is_muted(ti, tick):
+                    read = global_step + self._mod_value(MOD_POSITION, ti, tick)
                     vel = track.step_at(read)
                     if vel > 0:
-                        note = track.note + self._mod_value(MOD_NOTE, ti, global_step)
+                        note = track.note + self._mod_value(MOD_NOTE, ti, tick)
                         velocity = min(127, max(1, vel + track.velocity
-                                                + self._mod_value(MOD_VELOCITY, ti, global_step)))
+                                                + self._mod_value(MOD_VELOCITY, ti, tick)))
                         swing = track.swing if (global_step % 2 == 1) else 0
                         events.append(NoteEvent(
                             time=(tick + swing) * spt,

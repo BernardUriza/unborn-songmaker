@@ -4,12 +4,12 @@
     "sha256": "5cccd41e842be888"
   },
   "dream": {
-    "events": 134,
-    "sha256": "a7a7e54e3502d1d8"
+    "events": 133,
+    "sha256": "3162835063c66a0a"
   },
   "ending": {
-    "events": 317,
-    "sha256": "ab456a4070a3689e"
+    "events": 314,
+    "sha256": "e8c612f75fa83512"
   },
   "explore": {
     "events": 489,
@@ -36,8 +36,8 @@
     "sha256": "42573254273ea7f2"
   },
   "pressure": {
-    "events": 998,
-    "sha256": "cb7e0b1988269c72"
+    "events": 999,
+    "sha256": "91d51f41bcd2dcf5"
   },
   "ritual": {
     "events": 514,
@@ -56,8 +56,8 @@
     "sha256": "290bc4c94a1123e8"
   },
   "terminal": {
-    "events": 125,
-    "sha256": "2faf668f72eb363b"
+    "events": 121,
+    "sha256": "71a50168cdc3dcfc"
   },
   "to_forge_raining": {
     "events": 1221,

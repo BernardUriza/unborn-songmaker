@@ -39,6 +39,12 @@ class Track:
             return 0
         return self.steps[index % len(self.steps)]
 
+    def step_index(self, tick: int) -> int:
+        """Which step this track is on at an absolute tick -- its OWN clock
+        (offset, quant, length), regardless of who is asking. Port of
+        CTrack::GetStepIndex; this is how a modulator is read by its target."""
+        return ((tick - self.offset) // self.quant) % len(self.steps)
+
 
 @dataclass
 class Modulation:
