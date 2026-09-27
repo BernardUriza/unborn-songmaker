@@ -27,3 +27,8 @@ def test_modulator_is_read_on_its_own_clock():
     notes = [e.note for e in seq.events_in(0, 12)]
     assert notes == [64] * 4 + [69] * 4 + [64] * 4
 
+
+def test_length_is_the_loop():
+    assert Track(steps=[1, 2, 3], length=5).steps == [1, 2, 3, 0, 0]
+    assert Track(steps=[1, 2, 3], length=2).steps == [1, 2]
+    assert Track(steps=[1, 2, 3]).length == 3
