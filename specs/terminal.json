@@ -41,6 +41,6 @@
       "steps": [0, 1, 0, 2, 0] }
   ],
   "modulations": [
-    { "type": "position", "source": 13, "target": 3 }
+    { "type": "position", "source": "terminal-drift", "target": "voz16-close-filtered" }
   ]
 }

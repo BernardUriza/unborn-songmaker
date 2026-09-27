@@ -33,6 +33,6 @@
     { "name": "drift", "type": "modulator", "note": 0, "quant": 12, "length": 5, "steps": [0, 1, 2, 1, 0] }
   ],
   "modulations": [
-    { "type": "position", "source": 12, "target": 9 }
+    { "type": "position", "source": "drift", "target": "lead-7" }
   ]
 }

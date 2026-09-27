@@ -52,6 +52,6 @@
       "steps": [0, 2, 1, 3, 0] }
   ],
   "modulations": [
-    { "type": "position", "source": 18, "target": 14 }
+    { "type": "position", "source": "pressure-drift", "target": "voz16-ring-menace" }
   ]
 }

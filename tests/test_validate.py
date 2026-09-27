@@ -53,3 +53,26 @@ def test_load_raises_spec_error(tmp_path):
     with pytest.raises(SpecError, match="kik"):
         load(str(p))
 
+
+def test_modulations_by_name():
+    s = _spec()
+    by_index = sequencer_from(s).modulations
+    names = [t["name"] for t in s["tracks"]]
+    for m in s["modulations"]:
+        m["source"], m["target"] = names[m["source"]] if isinstance(m["source"], int) else m["source"], \
+            names[m["target"]] if isinstance(m["target"], int) else m["target"]
+    assert validate(s) == []
+    assert sequencer_from(s).modulations == by_index
+
+
+def test_bad_name_refs():
+    s = _spec()
+    s["modulations"] = [{"type": "note", "source": "nope", "target": "kick"},
+                        {"type": "note", "source": "kick", "target": "clap"}]
+    errors = validate(s)
+    assert any("'nope' is not a track name" in e for e in errors)
+    assert any("is not type 'modulator'" in e for e in errors)
+    s["tracks"][1]["name"] = "kick"
+    s["modulations"] = [{"type": "position", "source": "drift", "target": "kick"}]
+    assert any("names 2 tracks" in e for e in validate(s))
+

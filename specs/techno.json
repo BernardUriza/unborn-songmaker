@@ -62,6 +62,6 @@
     }
   ],
   "modulations": [
-    { "type": "position", "source": 6, "target": 5 }
+    { "type": "position", "source": "drift", "target": "bell-7" }
   ]
 }

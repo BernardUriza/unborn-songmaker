@@ -38,9 +38,9 @@
     { "name": "chord", "type": "modulator", "note": 0, "quant": 96, "length": 8, "steps": [0, 0, -7, -7, -9, -9, -5, -5] }
   ],
   "modulations": [
-    { "type": "note", "source": 14, "target": 5 },
-    { "type": "note", "source": 14, "target": 6 },
-    { "type": "note", "source": 15, "target": 0 },
-    { "type": "note", "source": 15, "target": 1 }
+    { "type": "note", "source": "melody", "target": "celesta-melody" },
+    { "type": "note", "source": "melody", "target": "celesta-melody-hi" },
+    { "type": "note", "source": "chord", "target": "pad-root" },
+    { "type": "note", "source": "chord", "target": "pad-fifth" }
   ]
 }

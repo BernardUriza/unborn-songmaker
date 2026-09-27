@@ -79,6 +79,6 @@
     }
   ],
   "modulations": [
-    { "type": "position", "source": 8, "target": 7 }
+    { "type": "position", "source": "drift", "target": "lead-7" }
   ]
 }

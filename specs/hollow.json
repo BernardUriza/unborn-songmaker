@@ -21,6 +21,6 @@
     { "name": "melody", "type": "modulator", "note": 0, "quant": 12, "length": 7, "steps": [0, 3, 7, 10, 7, 5, 3] }
   ],
   "modulations": [
-    { "type": "note", "source": 6, "target": 4 }
+    { "type": "note", "source": "melody", "target": "rhodes" }
   ]
 }

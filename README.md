@@ -45,7 +45,7 @@ changes; the parameters stay human-readable. See [`specs/unborn.json`](specs/unb
     { "name": "bell-7", "voice": "bell", "note": 60, "length": 7,
       "euclid": { "pulses": 3, "length": 7 } }
   ],
-  "modulations": [ { "type": "position", "source": 3, "target": 0 } ]
+  "modulations": [ { "type": "position", "source": "drift", "target": "bell-7" } ]
 }
 ```
 

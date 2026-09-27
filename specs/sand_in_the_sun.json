@@ -48,8 +48,8 @@
     { "name": "chord", "type": "modulator", "note": 0, "quant": 96, "length": 8, "steps": [0, 0, -2, -2, -4, -4, -2, -2] }
   ],
   "modulations": [
-    { "type": "note", "source": 24, "target": 17 },
-    { "type": "note", "source": 25, "target": 0 },
-    { "type": "note", "source": 25, "target": 1 }
+    { "type": "note", "source": "melody", "target": "nylon-lead" },
+    { "type": "note", "source": "chord", "target": "pad-warm-root" },
+    { "type": "note", "source": "chord", "target": "pad-warm-fifth" }
   ]
 }

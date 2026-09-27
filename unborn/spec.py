@@ -104,19 +104,39 @@ def validate(spec: dict, check_samples: bool = True) -> list[str]:
             errors.append(f"{where}: exit {exit_} must be > enter {enter}")
         for k in set(t.get("fx") or {}) - FX_KEYS:
             errors.append(f"{where}: unknown fx '{k}'")
+    names = [t.get("name") for t in tracks]
+    dupes = {n for n in names if n and names.count(n) > 1}
     for j, m in enumerate(spec.get("modulations", [])):
         where = f"modulation {j}"
         if m.get("type") not in MOD_TYPES:
             errors.append(f"{where}: type must be one of {sorted(MOD_TYPES)}, got {m.get('type')!r}")
+        ends = {}
         for end in ("source", "target"):
             ref = m.get(end)
-            if not isinstance(ref, int) or not 0 <= ref < len(tracks):
-                errors.append(f"{where}: {end} {ref!r} is not a track index")
-        tgt = m.get("target")
-        if isinstance(tgt, int) and 0 <= tgt < len(tracks) \
-                and tracks[tgt].get("type", NOTE) == MODULATOR:
+            if isinstance(ref, str):
+                if ref in dupes:
+                    errors.append(f"{where}: {end} '{ref}' names {names.count(ref)} tracks")
+                elif ref not in names:
+                    errors.append(f"{where}: {end} '{ref}' is not a track name")
+                else:
+                    ends[end] = names.index(ref)
+            elif isinstance(ref, int) and not isinstance(ref, bool) and 0 <= ref < len(tracks):
+                ends[end] = ref
+            else:
+                errors.append(f"{where}: {end} {ref!r} is neither a track name nor index")
+        if "source" in ends and tracks[ends["source"]].get("type", NOTE) != MODULATOR:
+            errors.append(f"{where}: source '{names[ends['source']]}' is not type 'modulator'")
+        if "target" in ends and tracks[ends["target"]].get("type", NOTE) == MODULATOR:
             errors.append(f"{where}: target is a modulator; recursive modulation is not supported")
     return errors
+
+
+def resolve_ref(ref, tracks: list[dict]) -> int:
+    """A modulation end as a track index. Names are canonical (they survive
+    inserting a track); a bare int is accepted for old specs."""
+    if isinstance(ref, str):
+        return [t.get("name") for t in tracks].index(ref)
+    return ref
 
 
 def track_from(spec: dict) -> Track:
@@ -141,7 +161,8 @@ def track_from(spec: dict) -> Track:
 
 def sequencer_from(spec: dict) -> Sequencer:
     tracks = [track_from(t) for t in spec.get("tracks", [])]
-    mods = [Modulation(m["type"], m["source"], m["target"])
+    raw = spec.get("tracks", [])
+    mods = [Modulation(m["type"], resolve_ref(m["source"], raw), resolve_ref(m["target"], raw))
             for m in spec.get("modulations", [])]
     return Sequencer(
         tracks=tracks,

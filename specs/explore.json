@@ -40,6 +40,6 @@
       "steps": [0, 1, 2, 1, 0] }
   ],
   "modulations": [
-    { "type": "position", "source": 12, "target": 9 }
+    { "type": "position", "source": "phase-drift", "target": "voz16-observer" }
   ]
 }

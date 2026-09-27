@@ -41,6 +41,6 @@
       "steps": [0, 1, 0, 2, 1] }
   ],
   "modulations": [
-    { "type": "position", "source": 13, "target": 10 }
+    { "type": "position", "source": "dream-drift", "target": "voz16-ghost-grain" }
   ]
 }

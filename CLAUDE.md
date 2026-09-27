@@ -54,11 +54,13 @@ non-silent, no NaN, distinct), drop into `soundbank/` — zero manual wiring.
 ## Spec grammar (the LLM-driven glass box)
 
 Top: `name, tempo, ticks_per_beat, bars, beats_per_bar, sidechain{source_voice,
-amount,release}, reverb{amount,decay}`. Each track: `voice` (any registered, or
-`sample:<name>`), `note`, `quant`, `length`, `steps[]` or `euclid{pulses,length,
-velocity}`, `swing`, `offset`, `enter`/`exit` (bars), `fx{}`, `type:"modulator"`.
-Modulations: `{type:"note|velocity|mute|position", source, target}` (indices into
-tracks — re-check them after inserting a track). Unknown keys
+amount,release}, reverb{amount,decay}`. Each track:
+`voice` (any registered, or `sample:<name>`), `note`, `quant`, `length`, `steps[]`
+or `euclid{pulses,length,velocity}`, `swing`, `offset`, `enter`/`exit` (bars),
+`fx{}`, `type:"modulator"`. Modulator steps are
+signed offsets (note 0 = rest centre). Modulations: `{type:"note|velocity|mute|
+position", source, target}` — **by track `name`** (ints still accepted for old
+specs). Source must be a modulator; a modulator cannot be a target. Unknown keys
 are errors, not silence: `python -c "from unborn.spec import load; load('specs/x.json')"`.
 
 ## Music-theory cheatsheet (what HVOB / deep-melodic actually use)

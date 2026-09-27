@@ -27,6 +27,6 @@
     { "name": "drift", "type": "modulator", "note": 0, "quant": 12, "length": 7, "steps": [0, 2, 0, 3, 0, 1, 0] }
   ],
   "modulations": [
-    { "type": "position", "source": 8, "target": 7 }
+    { "type": "position", "source": "drift", "target": "stab" }
   ]
 }

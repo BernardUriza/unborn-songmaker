@@ -46,6 +46,6 @@
       "steps": [0, 1, 0, 1, 0] }
   ],
   "modulations": [
-    { "type": "position", "source": 15, "target": 10 }
+    { "type": "position", "source": "ending-drift", "target": "voz16-let-go" }
   ]
 }
