@@ -9,9 +9,10 @@ from .track import (MOD_MUTE, MOD_NOTE, MOD_POSITION, MOD_VELOCITY, MODULATOR,
                     NOTE, Modulation, Track)
 
 TOP_KEYS = {"name", "tempo", "ticks_per_beat", "bars", "beats_per_bar", "sidechain",
-            "reverb", "tracks", "modulations"}
+            "reverb", "master", "tracks", "modulations"}
+MASTER_KEYS = {"lufs", "ceiling_db"}
 TRACK_KEYS = {"name", "type", "note", "length", "quant", "offset", "swing", "velocity",
-              "voice", "steps", "euclid", "mute", "fx", "enter", "exit"}
+              "voice", "steps", "euclid", "mute", "fx", "enter", "exit", "pan", "duck"}
 FX_KEYS = {"reverse", "pitch", "granular", "ring", "crush", "downsample", "drive", "bandpass"}
 MOD_TYPES = {MOD_MUTE, MOD_NOTE, MOD_POSITION, MOD_VELOCITY}
 SAMPLES_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "samples")
@@ -64,6 +65,8 @@ def validate(spec: dict, check_samples: bool = True) -> list[str]:
     for k in ("tempo", "ticks_per_beat", "bars", "beats_per_bar"):
         if k in spec and not (isinstance(spec[k], (int, float)) and spec[k] > 0):
             errors.append(f"'{k}' must be > 0, got {spec[k]!r}")
+    for k in set(spec.get("master") or {}) - MASTER_KEYS:
+        errors.append(f"master: unknown key '{k}'")
     bars = spec.get("bars", 4)
     tracks = spec.get("tracks", [])
     if not tracks:
@@ -104,6 +107,11 @@ def validate(spec: dict, check_samples: bool = True) -> list[str]:
             errors.append(f"{where}: exit {exit_} must be > enter {enter}")
         for k in set(t.get("fx") or {}) - FX_KEYS:
             errors.append(f"{where}: unknown fx '{k}'")
+        pan = t.get("pan", 0.0)
+        if not isinstance(pan, (int, float)) or not -1.0 <= pan <= 1.0:
+            errors.append(f"{where}: pan must be in -1..1, got {pan!r}")
+        if t.get("duck") is not None and not isinstance(t["duck"], bool):
+            errors.append(f"{where}: duck must be true/false")
     names = [t.get("name") for t in tracks]
     dupes = {n for n in names if n and names.count(n) > 1}
     for j, m in enumerate(spec.get("modulations", [])):
@@ -156,6 +164,8 @@ def track_from(spec: dict) -> Track:
         fx=spec.get("fx"),
         enter=spec.get("enter", 0),
         exit=spec.get("exit"),
+        pan=float(spec.get("pan", 0.0)),
+        duck=spec.get("duck"),
     )
 
 

@@ -28,13 +28,14 @@ Melody = a modulator track feeding `MOD_NOTE`. Never bolt on a parallel system
 ## Files
 
 - `cli.py` — `python cli.py cue <name>|all` (one-shot SFX) · `python cli.py sculpture specs/<x>.json`
-- `unborn/track.py` — `Track` (name,type,note,length,quant,offset,swing,velocity,voice,steps,mute,fx,enter,exit), `Modulation`. `length` IS the loop (Korda: steps are truncated/padded to it); `step_index(tick)` = the track's own clock
+- `unborn/track.py` — `Track` (name,type,note,length,quant,offset,swing,velocity,voice,steps,mute,fx,enter,exit,pan,duck), `Modulation`. `length` IS the loop (Korda: steps are truncated/padded to it); `step_index(tick)` = the track's own clock
 - `unborn/sequencer.py` — steps tracks, applies modulations, emits `NoteEvent`s. **A modulator is read on ITS OWN clock** (`src.step_index(tick)`, port of `CTrack::GetStepIndex`), never on the target's step counter — that bug re-voiced dream/ending/pressure/terminal until 2026-09-27
 - `unborn/synth.py` — additive voices (bell=inharmonic metal, harmonic, pad, subbass) + `midi_to_freq`
 - `unborn/drums.py` — kick/hat/clap/bass (render-layer DSP)
 - `unborn/soundbank/` — auto-registering sound library (see below)
 - `unborn/fx.py` — per-voice FX chain: reverse, pitch, granular, ring, crush, downsample, drive, bandpass
-- `unborn/render.py` — mix, VOICE_GAIN staging, sidechain duck, reverb, mp3 via ffmpeg
+- `unborn/render.py` — stereo mix (`pan` constant-power), VOICE_GAIN staging, sidechain duck (`Track.duck`, default = `DUCKABLE`), decorrelated stereo reverb, BS.1770 normalisation, mp3 via ffmpeg
+- `unborn/loudness.py` — K-weighting + gated integrated LUFS (calibrated: 997 Hz 0 dBFS one channel = -3.01), true peak, look-ahead limiter. `mix` targets `master.lufs` (-14) under `master.ceiling_db` (-1); the CLI prints the measured receipts
 - `unborn/spec.py` — JSON spec -> Sequencer; `validate()` (strict: unknown keys, voices, refs, ranges → `SpecError`); `euclid()` rhythm helper
 - `tests/` — `pytest`: every spec validates, renders ALIVE, and its NoteEvents match `tests/snapshots/events.json`. **A contract change that moves a snapshot is a re-voicing** — run `UNBORN_UPDATE_SNAPSHOTS=1 pytest`, listen to what moved, commit the snapshot with the reason
 - `specs/*.json` — the tracks (the catalog)
@@ -54,10 +55,10 @@ non-silent, no NaN, distinct), drop into `soundbank/` — zero manual wiring.
 ## Spec grammar (the LLM-driven glass box)
 
 Top: `name, tempo, ticks_per_beat, bars, beats_per_bar, sidechain{source_voice,
-amount,release}, reverb{amount,decay}`. Each track:
+amount,release}, reverb{amount,decay}, master{lufs,ceiling_db}`. Each track:
 `voice` (any registered, or `sample:<name>`), `note`, `quant`, `length`, `steps[]`
 or `euclid{pulses,length,velocity}`, `swing`, `offset`, `enter`/`exit` (bars),
-`fx{}`, `type:"modulator"`. Modulator steps are
+`pan` (-1..1), `duck` (bool), `fx{}`, `type:"modulator"`. Modulator steps are
 signed offsets (note 0 = rest centre). Modulations: `{type:"note|velocity|mute|
 position", source, target}` — **by track `name`** (ints still accepted for old
 specs). Source must be a modulator; a modulator cannot be a target. Unknown keys

@@ -78,7 +78,10 @@ def test_render_is_alive(path):
     window = min(spec.get("bars", 4), 16) * bpb * seq.ticks_per_beat
     audio = mix(seq.events_in(0, window, bpb), sidechain=spec.get("sidechain"),
                 rev=spec.get("reverb"))
+    assert audio.ndim == 2 and audio.shape[1] == 2
     assert np.all(np.isfinite(audio))
-    assert np.sqrt(np.mean(audio ** 2)) > 1e-3
-    frames = audio[: len(audio) // 4410 * 4410].reshape(-1, 4410)
+    mono = audio.mean(axis=1)
+    assert np.sqrt(np.mean(mono ** 2)) > 1e-3
+    frames = mono[: len(mono) // 4410 * 4410].reshape(-1, 4410)
     assert np.std(np.sqrt(np.mean(frames ** 2, axis=1))) > 1e-4
+    assert np.max(np.abs(audio)) <= 10 ** (-1.0 / 20) + 1e-6  # limiter ceiling held

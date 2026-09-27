@@ -16,6 +16,8 @@ class NoteEvent:
     duration: float
     voice: str
     fx: dict | None = None
+    pan: float = 0.0
+    duck: bool | None = None
 
 
 class Sequencer:
@@ -89,6 +91,8 @@ class Sequencer:
                             duration=track.quant * spt * 0.9,
                             voice=track.voice,
                             fx=track.fx,
+                            pan=track.pan,
+                            duck=track.duck,
                         ))
                 tick += track.quant
                 global_step += 1

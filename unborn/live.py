@@ -19,7 +19,7 @@ import threading
 import numpy as np
 from scipy import signal
 
-from .render import _bus
+from .render import _bus, reverb_ir
 from .synth import SR
 
 
@@ -29,14 +29,12 @@ class StreamingReverb:
 
     def __init__(self, amount: float = 0.22, decay: float = 1.8):
         self.amount = amount
-        n = int(SR * decay)
-        rng = np.random.default_rng(1)
-        ir = rng.standard_normal(n) * np.exp(-np.arange(n) / (decay * SR / 5))
-        self.ir = ir / (np.sqrt(np.sum(ir ** 2)) or 1.0)
-        self.tail = np.zeros(len(self.ir) - 1, dtype=np.float64)
+        self.ir = np.stack([reverb_ir(decay, 1), reverb_ir(decay, 2)], axis=1)  # L, R
+        self.tail = np.zeros((len(self.ir) - 1, 2), dtype=np.float64)
 
     def process(self, x: np.ndarray) -> np.ndarray:
-        wet_full = np.asarray(signal.fftconvolve(x, self.ir), dtype=np.float64)
+        wet_full = np.stack([np.asarray(signal.fftconvolve(x[:, ch], self.ir[:, ch]),
+                                        dtype=np.float64) for ch in range(2)], axis=1)
         wet_full[:len(self.tail)] += self.tail
         wet = wet_full[:len(x)]
         self.tail = wet_full[len(x):].copy()
@@ -57,7 +55,7 @@ class LiveRenderer:
         rev = spec.get("reverb") or {}
         self.reverb = StreamingReverb(rev.get("amount", 0.22), rev.get("decay", 1.8))
         self.cursor = 0
-        self.carry = np.zeros(self.tail_len, dtype=np.float64)
+        self.carry = np.zeros((self.tail_len, 2), dtype=np.float64)
         self.gain = 1.0
 
     def _sample_at(self, tick: int) -> int:
@@ -110,7 +108,7 @@ def play(renderer: LiveRenderer, buffer_chunks: int = 12, minutes: float | None 
         q.put(renderer.chunk())
     thread = threading.Thread(target=_producer, args=(renderer, q, stop), daemon=True)
     thread.start()
-    pending = np.zeros(0, dtype=np.float32)
+    pending = np.zeros((0, 2), dtype=np.float32)
     underruns = 0
 
     def callback(outdata, frames, time_info, status):
@@ -122,14 +120,14 @@ def play(renderer: LiveRenderer, buffer_chunks: int = 12, minutes: float | None 
                 pending = np.concatenate([pending, q.get_nowait()])
             except queue.Empty:
                 underruns += 1
-                outdata[:len(pending), 0] = pending
-                outdata[len(pending):, 0] = 0.0
-                pending = np.zeros(0, dtype=np.float32)
+                outdata[:len(pending)] = pending
+                outdata[len(pending):] = 0.0
+                pending = np.zeros((0, 2), dtype=np.float32)
                 return
-        outdata[:, 0] = pending[:frames]
+        outdata[:] = pending[:frames]
         pending = pending[frames:]
 
-    with sd.OutputStream(samplerate=SR, channels=1, dtype="float32",
+    with sd.OutputStream(samplerate=SR, channels=2, dtype="float32",
                          blocksize=2048, callback=callback):
         try:
             stop.wait(timeout=minutes * 60 if minutes else None)
@@ -142,7 +140,7 @@ def play(renderer: LiveRenderer, buffer_chunks: int = 12, minutes: float | None 
 
 def pipe(renderer: LiveRenderer, args: list[str], minutes: float | None = None) -> None:
     proc = subprocess.Popen(["ffmpeg", "-loglevel", "error", "-f", "f32le", "-ar", str(SR),
-                             "-ac", "1", "-i", "pipe:0", *args], stdin=subprocess.PIPE)
+                             "-ac", "2", "-i", "pipe:0", *args], stdin=subprocess.PIPE)
     chunks = int(minutes * 60 / (renderer.chunk_ticks * renderer.spt)) if minutes else None
     written = 0
     assert proc.stdin is not None

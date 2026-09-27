@@ -18,13 +18,15 @@ from unborn.spec import load
 OUT = os.path.join(os.path.dirname(__file__), "out")
 
 
-def emit(name: str, samples) -> None:
+def emit(name: str, samples, receipts: dict | None = None) -> None:
     os.makedirs(OUT, exist_ok=True)
     wav = os.path.join(OUT, f"{name}.wav")
     write_wav(wav, samples)
     mp3 = to_mp3(wav)
     dur = len(samples) / 44100
-    print(f"  {name}: {wav}{'  + .mp3' if mp3 else ''}  ({dur:.2f}s)")
+    facts = (f"  {receipts['lufs']:.1f} LUFS, {receipts['true_peak_db']:.1f} dBTP"
+             f" (gain {receipts['gain_db']:+.1f} dB)") if receipts else ""
+    print(f"  {name}: {wav}{'  + .mp3' if mp3 else ''}  ({dur:.2f}s){facts}")
 
 
 def cmd_cue(name: str) -> None:
@@ -42,7 +44,9 @@ def cmd_sculpture(path: str) -> None:
     events = seq.run(bars=bars, beats_per_bar=spec.get("beats_per_bar", 4))
     print(f"  {len(events)} notes from {len(seq.tracks)} tracks, {len(seq.modulations)} modulations")
     name = spec.get("name") or os.path.splitext(os.path.basename(path))[0]
-    emit(name, mix(events, sidechain=spec.get("sidechain"), rev=spec.get("reverb")))
+    receipts: dict = {}
+    emit(name, mix(events, sidechain=spec.get("sidechain"), rev=spec.get("reverb"),
+                   master=spec.get("master"), receipts=receipts), receipts)
 
 
 def cmd_live(path: str, minutes: float | None, sink: str, dest: str | None) -> None:

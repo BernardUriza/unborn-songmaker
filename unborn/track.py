@@ -33,6 +33,11 @@ class Track:
     fx: dict | None = None
     enter: int = 0
     exit: int | None = None
+    # render hints carried by the track (Korda's tracks carry a MIDI channel the
+    # same way): stereo position -1..1, and whether the sidechain ducks this voice
+    # (None = the render layer's default for that voice).
+    pan: float = 0.0
+    duck: bool | None = None
 
     def __post_init__(self) -> None:
         # Korda: the Length property IS the size of the step array (Track.h

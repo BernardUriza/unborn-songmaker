@@ -76,3 +76,11 @@ def test_bad_name_refs():
     s["modulations"] = [{"type": "position", "source": "drift", "target": "kick"}]
     assert any("names 2 tracks" in e for e in validate(s))
 
+
+def test_pan_and_master_keys():
+    s = _spec()
+    s["tracks"][0]["pan"] = 2
+    s["master"] = {"lufs": -16, "loud": 1}
+    errors = validate(s)
+    assert any("pan must be in -1..1" in e for e in errors)
+    assert any("master: unknown key 'loud'" in e for e in errors)
