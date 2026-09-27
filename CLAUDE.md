@@ -35,7 +35,8 @@ Melody = a modulator track feeding `MOD_NOTE`. Never bolt on a parallel system
 - `unborn/soundbank/` — auto-registering sound library (see below)
 - `unborn/fx.py` — per-voice FX chain: reverse, pitch, granular, ring, crush, downsample, drive, bandpass
 - `unborn/render.py` — mix, VOICE_GAIN staging, sidechain duck, reverb, mp3 via ffmpeg
-- `unborn/spec.py` — JSON spec -> Sequencer; `euclid()` rhythm helper
+- `unborn/spec.py` — JSON spec -> Sequencer; `validate()` (strict: unknown keys, voices, refs, ranges → `SpecError`); `euclid()` rhythm helper
+- `tests/` — `pytest`: every spec validates, renders ALIVE, and its NoteEvents match `tests/snapshots/events.json`. **A contract change that moves a snapshot is a re-voicing** — run `UNBORN_UPDATE_SNAPSHOTS=1 pytest`, listen to what moved, commit the snapshot with the reason
 - `specs/*.json` — the tracks (the catalog)
 - `samples/` — recorded voice (gitignored; local/private)
 
@@ -57,7 +58,8 @@ amount,release}, reverb{amount,decay}`. Each track: `voice` (any registered, or
 `sample:<name>`), `note`, `quant`, `length`, `steps[]` or `euclid{pulses,length,
 velocity}`, `swing`, `offset`, `enter`/`exit` (bars), `fx{}`, `type:"modulator"`.
 Modulations: `{type:"note|velocity|mute|position", source, target}` (indices into
-tracks — re-check them after inserting a track).
+tracks — re-check them after inserting a track). Unknown keys
+are errors, not silence: `python -c "from unborn.spec import load; load('specs/x.json')"`.
 
 ## Music-theory cheatsheet (what HVOB / deep-melodic actually use)
 

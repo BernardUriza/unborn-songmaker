@@ -59,7 +59,7 @@ changes; the parameters stay human-readable. See [`specs/unborn.json`](specs/unb
 ## Requirements
 
 `numpy`, `scipy`, `soundfile`, and `ffmpeg` on PATH (for mp3). See
-`requirements.txt`.
+`requirements.txt`. Tests: `pip install -r requirements-dev.txt && pytest`.
 
 ## Credits
 
