@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 samples/*.wav
 !samples/README.md
+.*.swp
