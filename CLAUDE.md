@@ -27,7 +27,8 @@ Melody = a modulator track feeding `MOD_NOTE`. Never bolt on a parallel system
 
 ## Files
 
-- `cli.py` — `python cli.py cue <name>|all` (one-shot SFX) · `python cli.py sculpture specs/<x>.json`
+- `cli.py` — `python cli.py cue <name>|all` (one-shot SFX) · `python cli.py sculpture specs/<x>.json` · `python cli.py live specs/<x>.json` (mode 2, endless) · `python cli.py ui` (catalog)
+- `unborn/ui.py` — stdlib `http.server` on 127.0.0.1:8765: lists `specs/`, plays `out/*.mp3` (Range → seekable), re-renders via a `cli.py sculpture` subprocess (an engine crash can't take the page down; the SpecError lands in the job log), draws each track's `enter`/`exit` window with a playhead
 - `unborn/track.py` — `Track` (name,type,note,length,quant,offset,swing,velocity,voice,steps,mute,fx,enter,exit,pan,duck), `Modulation`. `length` IS the loop (Korda: steps are truncated/padded to it); `step_index(tick)` = the track's own clock
 - `unborn/sequencer.py` — steps tracks, applies modulations, emits `NoteEvent`s. **A modulator is read on ITS OWN clock** (`src.step_index(tick)`, port of `CTrack::GetStepIndex`), never on the target's step counter — that bug re-voiced dream/ending/pressure/terminal until 2026-09-27
 - `unborn/synth.py` — additive voices (bell=inharmonic metal, harmonic, pad, subbass) + `midi_to_freq`

@@ -23,6 +23,7 @@ export. Rules in, mp3 out.
 python cli.py cue crystalline            # one-shot UI sound -> out/crystalline.{wav,mp3}
 python cli.py cue all                    # every UI cue
 python cli.py sculpture specs/unborn.json # a polymeter sculpture -> out/unborn.{wav,mp3}
+python cli.py ui                         # local catalog: play, re-render, see the arrangement
 ```
 
 - **cue** -- the app-facing SFX pipeline. Single gestures (chimes, prompts,

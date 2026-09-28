@@ -4,6 +4,7 @@
   python cli.py cue crystalline                 -> out/crystalline.{wav,mp3}
   python cli.py cue all                          -> every UI cue
   python cli.py sculpture specs/unborn.json      -> render a polymeter sculpture
+  python cli.py ui                               -> local catalog: play, render, arrangement
 
 The sculpture mode is the Korda heart: rules generate the music. The cue mode is
 the app-facing SFX pipeline. Both end in an mp3 ready to drop into a project."""
@@ -76,11 +77,17 @@ def main() -> None:
     v.add_argument("--minutes", type=float, default=None, help="stop after N minutes")
     v.add_argument("--sink", choices=["speaker", "ffmpeg"], default="speaker")
     v.add_argument("--dest", default=None, help="ffmpeg sink target (file or url)")
+    u = sub.add_parser("ui", help="local web catalog of the sculptures")
+    u.add_argument("--port", type=int, default=8765)
+    u.add_argument("--no-open", action="store_true", help="don't open the browser")
     args = p.parse_args()
     if args.mode == "cue":
         cmd_cue(args.name)
     elif args.mode == "sculpture":
         cmd_sculpture(args.path)
+    elif args.mode == "ui":
+        from unborn.ui import serve
+        serve(args.port, open_browser=not args.no_open)
     else:
         cmd_live(args.path, args.minutes, args.sink, args.dest)
 
