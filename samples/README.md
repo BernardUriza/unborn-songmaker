@@ -14,3 +14,16 @@ sample inherits polymeter, swing and the modulation network.
 - **One file per word**, named by the word: `samples/unborn.wav`.
 
 Then reference it in a spec: `{ "voice": "sample:unborn", "note": 60, ... }`.
+
+## Foley takes (home SFX from videopipe)
+
+`python cli.py import-sfx ~/Downloads/sfx-<session>.zip` unpacks a bundle from
+videopipe's recorder (`/sfx/record/<session>`) into one folder per sound:
+
+    samples/stamp_hit/take-01.wav, take-04.wav, ... + takes.json (provenance)
+
+`"voice": "sample:stamp_hit"` then plays a different take on each trigger
+(round-robin), pitched by `note` like any sample. Only the takes marked
+"conservar" in the recorder are imported; the leading ~0.5 s of room tone is cut
+so the transient lands on the beat. A `samples/<name>.wav` file, if present,
+wins over the folder of the same name.

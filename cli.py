@@ -5,6 +5,7 @@
   python cli.py cue all                          -> every UI cue
   python cli.py sculpture specs/unborn.json      -> render a polymeter sculpture
   python cli.py ui                               -> local catalog: play, render, arrangement
+  python cli.py import-sfx sfx-receipts.zip      -> home foley takes -> samples/<id>/ (sample:<id>)
 
 The sculpture mode is the Korda heart: rules generate the music. The cue mode is
 the app-facing SFX pipeline. Both end in an mp3 ready to drop into a project."""
@@ -50,6 +51,25 @@ def cmd_sculpture(path: str) -> None:
                    master=spec.get("master"), receipts=receipts), receipts)
 
 
+def cmd_import_sfx(path: str, include_pending: bool) -> None:
+    import zipfile
+    from unborn.sfx_import import SfxImportError, import_bundle
+    try:
+        report = import_bundle(path, include_pending=include_pending)
+    except (SfxImportError, zipfile.BadZipFile, FileNotFoundError) as exc:
+        print(f"  {exc}")
+        sys.exit(1)
+    for r in report:
+        if not r["written"]:
+            print(f"  {r['task']}: nothing kept ({r['skipped']} take(s) not marked keep) -- skipped")
+            continue
+        note = f"  !! clipped: {', '.join(r['clipped'])}" if r["clipped"] else ""
+        print(f"  {r['task']}: {len(r['written'])} take(s) -> samples/{r['task']}/"
+              f"  voice \"sample:{r['task']}\"{note}")
+        if r["shadowed"]:
+            print(f"  !! samples/{r['task']}.wav exists and wins over the folder -- rename one")
+
+
 def cmd_live(path: str, minutes: float | None, sink: str, dest: str | None) -> None:
     from unborn.live import LiveRenderer, pipe, play
     seq, spec = load(path)
@@ -80,11 +100,17 @@ def main() -> None:
     u = sub.add_parser("ui", help="local web catalog of the sculptures")
     u.add_argument("--port", type=int, default=8765)
     u.add_argument("--no-open", action="store_true", help="don't open the browser")
+    i = sub.add_parser("import-sfx", help="import a videopipe sfx-<session>.zip as sample takes")
+    i.add_argument("path", help="path to sfx-<session>.zip")
+    i.add_argument("--include-pending", action="store_true",
+                   help="also import takes not yet marked keep in the recorder")
     args = p.parse_args()
     if args.mode == "cue":
         cmd_cue(args.name)
     elif args.mode == "sculpture":
         cmd_sculpture(args.path)
+    elif args.mode == "import-sfx":
+        cmd_import_sfx(args.path, args.include_pending)
     elif args.mode == "ui":
         from unborn.ui import serve
         serve(args.port, open_browser=not args.no_open)

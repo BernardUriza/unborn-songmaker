@@ -40,7 +40,8 @@ Melody = a modulator track feeding `MOD_NOTE`. Never bolt on a parallel system
 - `unborn/spec.py` — JSON spec -> Sequencer; `validate()` (strict: unknown keys, voices, refs, ranges → `SpecError`); `euclid()` rhythm helper
 - `tests/` — `pytest`: every spec validates, renders ALIVE, and its NoteEvents match `tests/snapshots/events.json`. **A contract change that moves a snapshot is a re-voicing** — run `UNBORN_UPDATE_SNAPSHOTS=1 pytest`, listen to what moved, commit the snapshot with the reason
 - `specs/*.json` — the tracks (the catalog)
-- `samples/` — recorded voice (gitignored; local/private)
+- `samples/` — recorded audio (gitignored; local/private): `<name>.wav` (one recording) or `<name>/take-NN.wav` (a folder of takes, played round-robin — `_bus` counts triggers per sample voice, so renders stay deterministic)
+- `unborn/sfx_import.py` — `python cli.py import-sfx sfx-<session>.zip`: home foley recorded in videopipe's recorder (`/sfx/record/<session>`) → `samples/<task-id>/take-NN.wav` + `takes.json`. Only takes marked keep (`--include-pending` for the rest); leading/trailing room tone trimmed so the hit STARTS on the grid; the folder mirrors the bundle (stale takes removed). Use as `"voice": "sample:<task-id>"`
 
 ## The soundbank — 70 Codex-generated voices, auto-registered
 

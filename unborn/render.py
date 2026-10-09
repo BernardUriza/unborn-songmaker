@@ -56,21 +56,30 @@ def ducks(e: NoteEvent) -> bool:
     return e.duck if e.duck is not None else e.voice in DUCKABLE
 
 
-def resolve_voice(name: str, freq: float, dur: float) -> np.ndarray:
+def resolve_voice(name: str, freq: float, dur: float, take: int = 0) -> np.ndarray:
+    """`take` only matters for a sample voice backed by a folder of takes."""
     if name.startswith("sample:"):
         from .sampler import render_sample
-        return render_sample(name.split(":", 1)[1], freq, dur)
+        return render_sample(name.split(":", 1)[1], freq, dur, take)
     fn = ALL_VOICES.get(name, VOICES["bell"])
     return fn(freq, dur)
 
 
-def _bus(events: list[NoteEvent], n: int) -> np.ndarray:
-    """Sum events into an (n, 2) buffer, each placed by its pan."""
+def _bus(events: list[NoteEvent], n: int, rotation: dict | None = None) -> np.ndarray:
+    """Sum events into an (n, 2) buffer, each placed by its pan. `rotation`
+    counts triggers per sample voice so a folder of takes plays round-robin;
+    pass the same dict across calls (the two duck buses, live chunks) to keep
+    the rotation going instead of restarting it at take 0."""
     buf = np.zeros((n, 2), dtype=np.float64)
+    rotation = {} if rotation is None else rotation
     for e in events:
         left, right = pan_gains(e.pan)
         gain = VOICE_GAIN.get(e.voice, 1.0)
-        wave_data = resolve_voice(e.voice, midi_to_freq(e.note), e.duration)
+        take = 0
+        if e.voice.startswith("sample:"):
+            take = rotation.get(e.voice, 0)
+            rotation[e.voice] = take + 1
+        wave_data = resolve_voice(e.voice, midi_to_freq(e.note), e.duration, take)
         if e.fx:
             from .fx import apply_fx
             wave_data = apply_fx(wave_data, e.fx)
@@ -111,7 +120,8 @@ def mix(events: list[NoteEvent], tail: float = 1.5, sidechain: dict | None = Non
         dry = [e for e in events if not ducks(e)]
         env = _duck_envelope(kick_times, n, sidechain.get("amount", 0.45),
                              sidechain.get("release", 0.18))
-        out = _bus(dry, n) + _bus(ducked, n) * env[:, None]
+        rotation: dict = {}
+        out = _bus(dry, n, rotation) + _bus(ducked, n, rotation) * env[:, None]
     else:
         out = _bus(events, n)
     if rev:

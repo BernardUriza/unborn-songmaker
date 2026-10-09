@@ -4,6 +4,7 @@ the engine renders it -- the parameters stay human-readable, never a black box."
 import json
 import os
 
+from .sampler import sample_takes
 from .sequencer import Sequencer
 from .track import (MOD_MUTE, MOD_NOTE, MOD_POSITION, MOD_VELOCITY, MODULATOR,
                     NOTE, Modulation, Track)
@@ -95,9 +96,10 @@ def validate(spec: dict, check_samples: bool = True) -> list[str]:
         if kind == NOTE:
             voice = t.get("voice", "bell")
             if voice.startswith("sample:"):
-                wav = os.path.join(SAMPLES_DIR, voice.split(":", 1)[1] + ".wav")
-                if check_samples and not os.path.exists(wav):
-                    errors.append(f"{where}: sample not found: {wav}")
+                name = voice.split(":", 1)[1]
+                if check_samples and not sample_takes(name, SAMPLES_DIR):
+                    errors.append(f"{where}: sample not found: "
+                                  f"{os.path.join(SAMPLES_DIR, name)}.wav (or a folder of takes)")
             elif voice not in ALL_VOICES:
                 errors.append(f"{where}: unknown voice '{voice}'")
         enter, exit_ = t.get("enter", 0), t.get("exit")

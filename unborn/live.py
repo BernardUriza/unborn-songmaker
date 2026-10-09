@@ -57,6 +57,7 @@ class LiveRenderer:
         self.cursor = 0
         self.carry = np.zeros((self.tail_len, 2), dtype=np.float64)
         self.gain = 1.0
+        self.rotation: dict = {}  # sample-take round-robin carries across chunks
 
     def _sample_at(self, tick: int) -> int:
         return int(round(tick * self.spt * SR))
@@ -68,7 +69,7 @@ class LiveRenderer:
         events = self.seq.events_in(t0, t1, self.beats_per_bar, self.cycle_ticks)
         for e in events:
             e.time -= s0 / SR
-        buf = _bus(events, n + self.tail_len)
+        buf = _bus(events, n + self.tail_len, self.rotation)
         buf[:self.tail_len] += self.carry
         self.carry = buf[n:n + self.tail_len].copy()
         self.cursor = t1
