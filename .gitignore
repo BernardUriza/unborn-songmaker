@@ -4,3 +4,4 @@ __pycache__/
 samples/*.wav
 !samples/README.md
 .*.swp
+.DS_Store
