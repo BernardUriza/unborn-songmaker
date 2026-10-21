@@ -27,6 +27,14 @@ def test_collects_every_error_at_once():
     assert any("source 99" in e for e in errors)
 
 
+def test_note_must_be_midi():
+    s = _spec()
+    s["tracks"][1]["note"] = 200
+    assert any("note must be a MIDI int 0..127" in e for e in validate(s))
+    s["tracks"][1]["note"] = 36
+    assert not any("note must be" in e for e in validate(s))
+
+
 def test_windows_and_ranges():
     s = _spec()
     s["tracks"][0]["enter"], s["tracks"][0]["exit"] = 4, 2

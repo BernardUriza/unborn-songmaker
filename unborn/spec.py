@@ -87,6 +87,9 @@ def validate(spec: dict, check_samples: bool = True) -> list[str]:
             errors.append(f"{where}: step values must be ints")
         elif kind == NOTE and any(not 0 <= v <= 127 for v in steps):
             errors.append(f"{where}: note-track step velocities must be in 0..127")
+        note = t.get("note", 64)
+        if kind == NOTE and (not isinstance(note, int) or not 0 <= note <= 127):
+            errors.append(f"{where}: note must be a MIDI int 0..127, got {note!r}")
         quant = t.get("quant", 30)
         if not isinstance(quant, int) or quant < 1:
             errors.append(f"{where}: quant must be an int >= 1, got {quant!r}")
